@@ -1,22 +1,29 @@
 package com.clinica.autenticacion.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
+import com.clinica.autenticacion.dto.AuthRequest;
+import com.clinica.autenticacion.dto.AuthResponse;
+import com.clinica.autenticacion.service.AuthService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
-@RequiredArgsConstructor
+@RequestMapping("/auth")
 public class AuthController {
-  @PostMapping(value = "login")
-  public String login(){
-    return "Login from public endpoint";
-  }
 
-  @PostMapping(value = "register")
-  public String register(){
-    return "Register from public endpoint";
-  }
+    private final AuthService service;
+
+    public AuthController(AuthService service) {
+        this.service = service;
+    }
+
+    @PostMapping("/register")
+    public AuthResponse register(@RequestBody AuthRequest request) {
+        String response = service.register(request.getNombre(), request.getPassword());
+        return new AuthResponse(response);
+    }
+
+    @PostMapping("/login")
+    public AuthResponse login(@RequestBody AuthRequest request) {
+        String response = service.login(request.getNombre(), request.getPassword());
+        return new AuthResponse(response);
+    }
 }

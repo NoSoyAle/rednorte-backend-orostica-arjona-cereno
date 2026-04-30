@@ -21,6 +21,7 @@ public class Usuario {
     private String email;
     private String password;
     private String rol;
+    private String telefono;
     private String estado;
 
     public Long getId() {
@@ -47,12 +48,21 @@ public class Usuario {
       this.email = email;
     }
 
-    public Usuario(String nombre, String email, String password, String rol, String estado) {
+    public String getTelefono(){
+      return telefono;
+    }
+
+    public void setTelefono (String telefono){
+      this.telefono = telefono;
+    }
+
+    public Usuario(String nombre, String email, String password, String rol, String estado, String telefono) {
       this.nombre = nombre;
       this.email = email;
       this.password = password;
       this.rol = rol;
       this.estado = estado;
+      this.telefono = telefono;
     }
 
 }

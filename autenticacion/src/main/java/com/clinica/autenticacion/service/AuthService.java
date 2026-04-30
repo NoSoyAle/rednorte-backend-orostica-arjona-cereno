@@ -1,20 +1,49 @@
 package com.clinica.autenticacion.service;
-import java.util.List;
+/* import com.clinica.autenticacion.AutenticacionApplication;
+import java.util.List; */
 import com.clinica.autenticacion.model.Usuario;
+import com.clinica.autenticacion.repository.UsuarioRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AuthService {
 
 
-public interface AuthService {
-  List<Usuario> listarUsuarios();
+  private final UsuarioRepository usuarioRepository;
+  private final PasswordEncoder passwordEncoder;
 
-  Usuario crearUsuario(Usuario usuario);
+    public AuthService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+        this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-  Usuario actualizarUsuario(Usuario usuario);
+    public String register(String nombre, String password) {
 
-  void eliminarUsuario(Long id);
+        if (usuarioRepository.findByNombre(nombre).isPresent()) {
+            return "Usuario ya existe";
+        }
 
-  Usuario obtenerUsuarioPorId(Long id);
+        Usuario usuario = new Usuario();
+        usuario.setNombre(nombre);
+        usuario.setPassword(passwordEncoder.encode(password));
 
-  Usuario obtenerUsuarioPorEmail(String email);
+        usuarioRepository.save(usuario);
 
-  Usuario obtenerUsuarioPorNombre(String nombre);
+        return "Usuario registrado correctamente";
+    }
+
+    public String login(String nombre, String password) {
+
+        Usuario usuario = usuarioRepository.findByNombre(nombre)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        if (!passwordEncoder.matches(password, usuario.getPassword())) {
+            throw new RuntimeException("Contraseña incorrecta");
+        }
+
+        return "Login exitoso";
+    }
 }
+
+
