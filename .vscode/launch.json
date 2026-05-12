@@ -2,17 +2,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "AutenticacionApplication",
-            "request": "launch",
-            "mainClass": "com.clinica.autenticacion.AutenticacionApplication"
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-AuthServiceApplication<auth-service>",
+            "name": "Spring Boot-AgendaApplication<agenda>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.paciente.auth_service.AuthServiceApplication",
-            "projectName": "auth-service",
+            "mainClass": "com.clinica.agenda.AgendaApplication",
+            "projectName": "agenda",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
