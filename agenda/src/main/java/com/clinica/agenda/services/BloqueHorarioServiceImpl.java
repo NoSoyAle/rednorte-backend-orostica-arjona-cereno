@@ -41,8 +41,8 @@ public class BloqueHorarioServiceImpl implements BloqueHorarioServices {
         existente.setHoraInicio(bloque.getHoraInicio());
         existente.setHoraFin(bloque.getHoraFin());
         existente.setEstado(bloque.getEstado());
-        existente.setDoctorId(bloque.getDoctorId());
-        existente.setPacienteId(bloque.getPacienteId());
+        existente.setDoctor(bloque.getDoctor());
+    
 
         return BloqueHorariorepository.save(existente);
     }
