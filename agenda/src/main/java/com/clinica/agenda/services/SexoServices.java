@@ -9,5 +9,6 @@ public interface SexoServices {
     Sexo crearSexo(Sexo sexo);
 
     Sexo buscarSexo(Long id);
-    //No vamos a eliminar un sexo, probablemente solo tengamos q agregar
+
+    Sexo eliminarSexo(Long id);
 }

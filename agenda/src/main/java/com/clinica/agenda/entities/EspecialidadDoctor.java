@@ -25,20 +25,9 @@ import lombok.AllArgsConstructor;
 public class EspecialidadDoctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private Long doctorId;
+    private Long especialidadId;
     private LocalDate fechaEgreso;
-
-    @ManyToOne
-    @JoinColumn(name = "idDoctor")
-    @JsonIgnore
-    private Doctor doctor;
-    
-
-    @ManyToOne
-    @JoinColumn(name = "idEspecialidad")
-    @JsonIgnore
-    private Especialidad especialidad;
 
     
 }

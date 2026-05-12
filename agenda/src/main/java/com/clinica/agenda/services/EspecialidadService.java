@@ -12,7 +12,7 @@ public interface EspecialidadService {
     Optional<Especialidad> buscarEspecialidad(Long id);
     //Porque la especialidad puede no existir, entonces se devuelve un Optional para manejar ese caso.
 
-
+    void eliminarEspecialidad(Long id);
 
 
 

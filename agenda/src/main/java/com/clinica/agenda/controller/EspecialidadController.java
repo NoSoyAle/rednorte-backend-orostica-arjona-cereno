@@ -1,6 +1,7 @@
 package com.clinica.agenda.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,4 +38,8 @@ public class EspecialidadController {
                 .orElseThrow(() -> new RuntimeException("Especialidad no encontrada con id: " + id));
     }
 
+    @DeleteMapping("/{id}")
+    public void eliminarEspecialidad(@PathVariable Long id) {
+        especialidadService.eliminarEspecialidad(id);
+    }
 }

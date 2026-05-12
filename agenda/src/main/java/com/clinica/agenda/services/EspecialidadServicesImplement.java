@@ -24,6 +24,11 @@ public class EspecialidadServicesImplement implements EspecialidadService {
     }
 
     @Override
+    public void eliminarEspecialidad(Long id) {
+        especialidadRepository.deleteById(id);
+    }
+
+    @Override
     public Optional<Especialidad> buscarEspecialidad(Long id) {
         return especialidadRepository.findById(id);
     }

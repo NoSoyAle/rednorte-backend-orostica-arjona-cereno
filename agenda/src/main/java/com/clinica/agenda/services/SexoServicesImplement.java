@@ -27,4 +27,13 @@ public class SexoServicesImplement implements SexoServices{
         return sexoRepositorie.findById(id).orElse(null);
         };
 
+    @Override
+    public Sexo eliminarSexo(Long id){
+        Sexo sexo = buscarSexo(id);
+        if (sexo != null) {
+            sexoRepositorie.deleteById(id);
+        }
+        return sexo;
+    };
+
 }
