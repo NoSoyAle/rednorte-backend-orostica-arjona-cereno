@@ -2,6 +2,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "AutenticacionApplication",
+            "request": "launch",
+            "mainClass": "com.clinica.autenticacion.AutenticacionApplication"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-AuthServiceApplication<auth-service>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

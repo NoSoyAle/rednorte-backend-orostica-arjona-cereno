@@ -1,4 +1,4 @@
-package com.clinica.apigateway;
+package com.apireservas.apigateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
