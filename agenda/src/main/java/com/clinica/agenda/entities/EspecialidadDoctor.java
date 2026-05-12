@@ -25,14 +25,14 @@ import lombok.AllArgsConstructor;
 public class EspecialidadDoctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idEspDoc;
     
     @ManyToOne
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "id")
     private Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name = "especialidad_id")
+    @JoinColumn(name = "idEspecialidad")
     private Especialidad especialidad;
 
     private LocalDate fechaEgreso;
