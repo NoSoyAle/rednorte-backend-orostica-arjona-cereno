@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("api/doctorEspecialidad")
+@RequestMapping("/api/doctorEspecialidad")
 public class EspDocController {
     
     @Autowired

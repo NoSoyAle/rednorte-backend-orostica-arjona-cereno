@@ -1,5 +1,6 @@
 package com.clinica.agenda.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,21 +14,17 @@ import com.clinica.agenda.services.DoctorServices;
 import java.util.List;  
 
 @RestController
-@RequestMapping("api/doctor")
+@RequestMapping("/api/doctor")
 public class DoctorController {
-        private final DoctorServices doctorServices;
+    @Autowired
+    private DoctorServices doctorServices;
 
-    public DoctorController(DoctorServices doctorServices) {
-        this.doctorServices = doctorServices;
-    }
-
-    // Obtener todos en forma lista
     @GetMapping
     public List<Doctor> listarDoctores() {
         return doctorServices.listarDoctores();
     }
 
-    // Obtener por id
+    
     @GetMapping("/{id}")
     public Doctor obtenerDoctor(@PathVariable Long id) {
         return doctorServices.buscarDoctor(id);

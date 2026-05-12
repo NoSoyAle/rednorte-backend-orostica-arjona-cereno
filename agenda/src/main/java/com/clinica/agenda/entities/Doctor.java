@@ -43,6 +43,9 @@ public class Doctor {
     private Sexo sexo;
 
     @OneToMany(mappedBy = "doctor")
+    private List<BloqueHorario> bloques;
+
+    @OneToMany(mappedBy = "doctor")
     @JsonIgnore
     private List<EspecialidadDoctor> doctorEspecialidades;
  
