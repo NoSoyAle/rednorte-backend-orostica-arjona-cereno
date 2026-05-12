@@ -1,0 +1,44 @@
+package com.paciente.auth_service.security;
+
+
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Component;
+import java.security.Key;
+import java.util.Date;
+
+@Component
+public class JwtUtil {
+
+    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final long EXPIRATION = 86400000; // 24 horas
+
+    public String generateToken(String rut, String rol) {
+        return Jwts.builder()
+                .setSubject(rut)
+                .claim("rol", rol)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                .signWith(key)
+                .compact();
+    }
+
+    public String getRut(String token) {
+        return Jwts.parserBuilder().setSigningKey(key).build()
+                .parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public String getRol(String token) {
+        return (String) Jwts.parserBuilder().setSigningKey(key).build()
+                .parseClaimsJws(token).getBody().get("rol");
+    }
+
+    public boolean validate(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+}
