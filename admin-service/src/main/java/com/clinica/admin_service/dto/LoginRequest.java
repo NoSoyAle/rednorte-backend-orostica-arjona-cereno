@@ -1,4 +1,4 @@
-package com.paciente.auth_service.dto;
+package com.clinica.admin_service.dto;
 
 import lombok.Data;
 

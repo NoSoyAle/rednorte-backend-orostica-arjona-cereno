@@ -1,4 +1,4 @@
-package com.paciente.auth_service.security;
+package com.clinica.admin_service.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,16 +22,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        
+
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
-            
+
             if (jwtUtil.validate(token)) {
                 String rut = jwtUtil.getRut(token);
-                // Si el token es válido, le damos acceso al sistema
-                UsernamePasswordAuthenticationToken authentication = 
+                UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(rut, null, new ArrayList<>());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

@@ -1,13 +1,18 @@
-package com.paciente.auth_service.controller;
+package com.clinica.admin_service.controller;
 
-import com.paciente.auth_service.Model.Usuario;
-import com.paciente.auth_service.dto.*;
-import com.paciente.auth_service.repository.UsuarioRepository;
-import com.paciente.auth_service.security.JwtUtil;
+import com.clinica.admin_service.dto.LoginRequest;
+import com.clinica.admin_service.dto.LoginResponse;
+import com.clinica.admin_service.model.Usuario;
+import com.clinica.admin_service.repository.UsuarioRepository;
+import com.clinica.admin_service.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*")
 @RestController

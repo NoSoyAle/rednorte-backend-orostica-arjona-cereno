@@ -1,9 +1,10 @@
-package com.paciente.auth_service.security;
+package com.clinica.admin_service.security;
 
-
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
+
 import java.security.Key;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ import java.util.Date;
 public class JwtUtil {
 
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private final long EXPIRATION = 86400000; // 24 horas
+    private final long EXPIRATION = 86400000;
 
     public String generateToken(String rut, String rol) {
         return Jwts.builder()
