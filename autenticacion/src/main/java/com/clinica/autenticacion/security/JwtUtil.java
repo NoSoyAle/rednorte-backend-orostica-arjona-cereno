@@ -3,14 +3,17 @@ package com.clinica.autenticacion.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import java.security.Key;
 import java.util.Date;
 
 @Component
 public class JwtUtil {
 
-    private final String SECRET_KEY = "mi_clave_secreta";
+    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final long EXPIRATION = 86400000;
 
     // Generar token
     public String generateToken(String username) {
@@ -18,7 +21,7 @@ public class JwtUtil {
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 1 día
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(key)
                 .compact();
     }
 
@@ -39,7 +42,7 @@ public class JwtUtil {
 
     private Claims getClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
+                .setSigningKey(key)
                 .parseClaimsJws(token)
                 .getBody();
     }

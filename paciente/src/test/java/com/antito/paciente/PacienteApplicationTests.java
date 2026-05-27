@@ -1,10 +1,10 @@
-package com.clinica.apigateway;
+package com.antito.paciente;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApigatewayApplicationTests {
+class PacienteApplicationTests {
 
 	@Test
 	void contextLoads() {
