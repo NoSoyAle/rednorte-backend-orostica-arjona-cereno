@@ -1,4 +1,5 @@
 package com.clinica.agenda.services;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -9,30 +10,28 @@ import com.clinica.agenda.entities.EspecialidadDoctor;
 import com.clinica.agenda.repository.EspecialidadDoctorRepository;
 
 @Service
-public class EspDoServicesImplement  implements EspDocService{
+public class EspDoServicesImplement implements EspDocService {
 
     @Autowired
-    private EspecialidadDoctorRepository EspecialidadDoctorRepository;
+    private EspecialidadDoctorRepository especialidadDoctorRepository;
 
     @Override
     public List<EspecialidadDoctor> listarEspecialidadesDoctores() {
-        return EspecialidadDoctorRepository.findAll();
+        return especialidadDoctorRepository.findAll();
     }
 
     @Override
     public EspecialidadDoctor crearVinculacionEspecialidadDoctor(EspecialidadDoctor especialidadDoctor) {
-        return EspecialidadDoctorRepository.save(especialidadDoctor);
+        return especialidadDoctorRepository.save(especialidadDoctor);
     }
 
     @Override
     public Optional<EspecialidadDoctor> buscarEspecialidadDoctor(Long id) {
-        return EspecialidadDoctorRepository.findById(id);
+        return especialidadDoctorRepository.findById(id);
     }
 
     @Override
     public void DesvincularEspecialidadDoctor(Long id) {
-        EspecialidadDoctorRepository.deleteById(id);
-        
+        especialidadDoctorRepository.deleteById(id);
     }
-
 }

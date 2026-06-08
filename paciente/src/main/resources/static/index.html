@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portal Paciente | Red Norte Salud</title>
+    <link rel="stylesheet" href="/pacientes/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="#inicio" aria-label="Inicio Red Norte Salud">
+            <span class="brand-mark" aria-hidden="true">+</span>
+            <span>
+                <strong>Red Norte Salud</strong>
+                <small>Portal paciente</small>
+            </span>
+        </a>
+
+        <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="main-menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="main-menu" class="main-menu" aria-label="Menu principal">
+            <a href="#estado">Mi estado</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#red">Red asistencial</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <main id="inicio">
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">Atencion coordinada en hospitales, APS y clinicas especializadas</p>
+                <h1>Consulta tu avance y encuentra apoyo de salud sin iniciar sesion.</h1>
+                <p class="hero-text">
+                    Revisa el estado actual de tus solicitudes, orientacion de atencion y servicios disponibles en la red.
+                </p>
+                <div class="hero-actions">
+                    <a class="primary-action" href="#estado">Ver mi estado</a>
+                    <a class="secondary-action" href="#servicios">Explorar servicios</a>
+                </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="network-card hospital">
+                    <span>Hospital</span>
+                    <strong>Urgencia y alta complejidad</strong>
+                </div>
+                <div class="network-card primary">
+                    <span>APS</span>
+                    <strong>Control y seguimiento</strong>
+                </div>
+                <div class="network-card clinic">
+                    <span>Clinica</span>
+                    <strong>Especialidades y examenes</strong>
+                </div>
+            </div>
+        </section>
+
+        <section id="estado" class="status-section">
+            <div class="section-heading">
+                <p class="eyebrow">Seguimiento paciente</p>
+                <h2>Estado actual de tus solicitudes</h2>
+                <p>Ingresa el codigo entregado por el centro de salud para consultar el progreso de una solicitud.</p>
+            </div>
+
+            <form class="code-lookup" aria-label="Consulta de solicitud por codigo">
+                <label for="tracking-code">Codigo de solicitud</label>
+                <div class="code-actions">
+                    <input id="tracking-code" name="tracking-code" type="text" placeholder="Ej: RN-4821" autocomplete="off">
+                    <button class="primary-action" type="submit">Consultar</button>
+                </div>
+                <p class="lookup-message" role="status" aria-live="polite">Puedes probar con RN-4821, RN-3057 o RN-9184.</p>
+            </form>
+
+            <div class="request-summary" aria-live="polite">
+                <span>Codigo consultado</span>
+                <strong class="current-code">RN-4821</strong>
+            </div>
+
+            <div class="status-layout">
+                <article class="progress-panel" aria-labelledby="progress-title">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="eyebrow">Solicitud destacada</p>
+                            <h3 id="progress-title">Hora a medico especialista</h3>
+                        </div>
+                        <span class="status-pill">En preparacion</span>
+                    </div>
+
+                    <div class="progress-track" aria-label="Progreso de hora medica">
+                        <span class="progress-fill"></span>
+                    </div>
+
+                    <ol class="steps">
+                        <li class="done">
+                            <span></span>
+                            <div>
+                                <strong>Solicitud recibida</strong>
+                                <small>Datos registrados por la red.</small>
+                            </div>
+                        </li>
+                        <li class="done">
+                            <span></span>
+                            <div>
+                                <strong>Priorizacion clinica</strong>
+                                <small>Equipo reviso antecedentes.</small>
+                            </div>
+                        </li>
+                        <li class="active">
+                            <span></span>
+                            <div>
+                                <strong>Asignacion de cupo</strong>
+                                <small>Buscando disponibilidad en la red.</small>
+                            </div>
+                        </li>
+                        <li>
+                            <span></span>
+                            <div>
+                                <strong>Confirmacion</strong>
+                                <small>Recibiras fecha, hora y recinto.</small>
+                            </div>
+                        </li>
+                    </ol>
+                </article>
+
+                <aside class="waiting-list" aria-label="Otras solicitudes en espera">
+                    <h3>Solicitudes de ejemplo</h3>
+                    <button class="wait-item selected" type="button" data-code="RN-4821" data-progress="68" data-title="Hora a medico especialista" data-state="En preparacion">
+                        <span>Medico especialista</span>
+                        <strong>68%</strong>
+                    </button>
+                    <button class="wait-item" type="button" data-code="RN-3057" data-progress="42" data-title="Hora a examenes" data-state="Revision pendiente">
+                        <span>Examenes</span>
+                        <strong>42%</strong>
+                    </button>
+                    <button class="wait-item" type="button" data-code="RN-9184" data-progress="25" data-title="Interconsulta" data-state="Solicitud recibida">
+                        <span>Interconsulta</span>
+                        <strong>25%</strong>
+                    </button>
+                </aside>
+            </div>
+        </section>
+
+        <section id="servicios" class="services-section">
+            <div class="section-heading">
+                <p class="eyebrow">Que ofrece la red</p>
+                <h2>Servicios disponibles para pacientes y familias</h2>
+            </div>
+            <div class="service-grid">
+                <article>
+                    <span class="service-icon">H</span>
+                    <h3>Hospitales</h3>
+                    <p>Atencion de urgencia, hospitalizacion, pabellones, derivaciones y unidades de mayor complejidad.</p>
+                </article>
+                <article>
+                    <span class="service-icon">A</span>
+                    <h3>Centros de atencion primaria</h3>
+                    <p>Controles preventivos, vacunacion, programas cronicos, salud familiar y seguimiento territorial.</p>
+                </article>
+                <article>
+                    <span class="service-icon">E</span>
+                    <h3>Clinicas especializadas</h3>
+                    <p>Consultas de especialidad, procedimientos ambulatorios, imagenologia y examenes de apoyo.</p>
+                </article>
+                <article>
+                    <span class="service-icon">O</span>
+                    <h3>Orientacion al paciente</h3>
+                    <p>Informacion sobre requisitos, preparacion para examenes, ubicaciones y canales de contacto.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="red" class="network-section">
+            <div>
+                <p class="eyebrow">Red integrada</p>
+                <h2>Una ruta de atencion conectada</h2>
+                <p>
+                    La red coordina prestadores para que cada paciente sea derivado al nivel de atencion que corresponde:
+                    APS para seguimiento, hospitales para casos complejos y clinicas especializadas para diagnostico o tratamiento.
+                </p>
+            </div>
+            <ul class="network-list">
+                <li><strong>24/7</strong><span>Orientacion y urgencias segun disponibilidad local.</span></li>
+                <li><strong>3 niveles</strong><span>Primaria, hospitalaria y especializada.</span></li>
+                <li><strong>Seguimiento</strong><span>Estados visibles para solicitudes relevantes.</span></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer id="contacto" class="site-footer">
+        <div>
+            <strong>Red Norte Salud</strong>
+            <p>Administracion de hospitales, centros de atencion primaria y clinicas especializadas.</p>
+        </div>
+        <div>
+            <span>Mesa de ayuda</span>
+            <a href="tel:+56000000000">+56 00 0000 0000</a>
+            <a href="mailto:contacto@rednortesalud.cl">contacto@rednortesalud.cl</a>
+        </div>
+        <div>
+            <span>Accesos</span>
+            <a href="#estado">Estado de solicitudes</a>
+            <a href="#servicios">Servicios de salud</a>
+        </div>
+    </footer>
+
+    <script src="/pacientes/app.js"></script>
+</body>
+</html>
