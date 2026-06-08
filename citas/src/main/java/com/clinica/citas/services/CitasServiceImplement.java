@@ -2,6 +2,8 @@ package com.clinica.citas.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
 import com.clinica.citas.repository.CitaRepositorie;
 import com.clinica.citas.entities.Cita;
 import java.util.List;
@@ -11,6 +13,9 @@ public class CitasServiceImplement implements CitasService {
     @Autowired
     private CitaRepositorie citasRepository;
 
+    @Autowired
+    private WebClient webClient; 
+    
     @Override
     public List<Cita> listarCitas() {
         return citasRepository.findAll();

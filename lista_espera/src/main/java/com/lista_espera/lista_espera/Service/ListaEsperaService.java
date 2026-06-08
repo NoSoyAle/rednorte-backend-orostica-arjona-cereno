@@ -3,7 +3,9 @@ package com.lista_espera.lista_espera.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.lista_espera.lista_espera.client.AgendaClient;
 import com.lista_espera.lista_espera.dto.BloqueHorarioDto;
@@ -19,6 +21,7 @@ public class ListaEsperaService {
 
     private final ListaEsperaRepository repo;
     private final AgendaClient agendaClient;
+
 
     public ListaEspera agregar(ListaEspera l) {
         l.setFechaIngreso(LocalDateTime.now());
