@@ -8,6 +8,67 @@
             "mainClass": "com.clinica.agenda.AgendaApplication",
             "projectName": "agenda",
             "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AgendaApplication<agenda>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.clinica.agenda.AgendaApplication",
+            "projectName": "agenda",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CitasApplication<citas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.clinica.citas.CitasApplication",
+            "projectName": "citas",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ListaEsperaApplication<lista_espera>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.lista_espera.lista_espera.ListaEsperaApplication",
+            "projectName": "lista_espera",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-NotificacionesApplication<notificaciones>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.clinica.notificaciones.NotificacionesApplication",
+            "projectName": "notificaciones",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ReasignacionApplication<reasignacion>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.clinica.reasignacion.ReasignacionApplication",
+            "projectName": "reasignacion",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AdminServiceApplication<admin-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.clinica.admin_service.AdminServiceApplication",
+            "projectName": "admin-service",
+            "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
     ]

@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.lista_espera.lista_espera.client.AgendaClient;
+import com.lista_espera.lista_espera.dto.BloqueHorarioDto;
 import com.lista_espera.lista_espera.Model.EstadoEspera;
 import com.lista_espera.lista_espera.Model.ListaEspera;
 import com.lista_espera.lista_espera.Repository.ListaEsperaRepository;
@@ -15,7 +17,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ListaEsperaService {
 
-private final ListaEsperaRepository repo;
+    private final ListaEsperaRepository repo;
+    private final AgendaClient agendaClient;
 
     public ListaEspera agregar(ListaEspera l) {
         l.setFechaIngreso(LocalDateTime.now());
@@ -41,4 +44,8 @@ private final ListaEsperaRepository repo;
         repo.deleteById(id);
     }
 
+    // Método que consulta Agenda
+    public List<BloqueHorarioDto> obtenerBloquesDoctor(Long doctorId) {
+        return agendaClient.obtenerBloquesDoctor(doctorId);
+    }
 }

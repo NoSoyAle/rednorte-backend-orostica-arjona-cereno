@@ -4,8 +4,9 @@ import com.clinica.agenda.entities.BloqueHorario;
 
 import java.time.LocalDate;
 import java.util.List;
+
 public interface BloqueHorarioServices {
-    
+
     List<BloqueHorario> listarTodos();
 
     BloqueHorario buscarPorId(Long id);
@@ -16,6 +17,10 @@ public interface BloqueHorarioServices {
 
     void eliminar(Long id);
 
-    List<BloqueHorario> porDoctorYFecha(Long doctorId, LocalDate fecha);
+    List<BloqueHorario> porDoctorYFecha(
+            Long doctorId,
+            LocalDate fecha);
 
+    List<BloqueHorario> obtenerBloquesDoctor(
+            Long doctorId);
 }

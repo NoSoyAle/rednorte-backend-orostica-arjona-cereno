@@ -1,9 +1,7 @@
-package com.paciente.auth_service.repository;
+package com.clinica.admin_service.repository;
 
-
+import com.clinica.admin_service.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.paciente.auth_service.Model.Usuario;
 
 import java.util.Optional;
 
