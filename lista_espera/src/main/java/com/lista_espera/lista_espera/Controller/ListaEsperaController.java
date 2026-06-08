@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lista_espera.lista_espera.Model.EstadoEspera;
 import com.lista_espera.lista_espera.Model.ListaEspera;
 import com.lista_espera.lista_espera.Service.ListaEsperaService;
+import com.lista_espera.lista_espera.dto.BloqueHorarioDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -54,4 +55,11 @@ private final ListaEsperaService service;
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/doctor/{doctorId}/bloques")
+    public List<BloqueHorarioDto> obtenerBloquesDoctor(
+            @PathVariable Long doctorId) {
+
+        return service.obtenerBloquesDoctor(
+                doctorId);
+}
 }
