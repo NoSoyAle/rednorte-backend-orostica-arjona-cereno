@@ -1,12 +1,11 @@
 package com.clinica.agenda.services;
+
 import com.clinica.agenda.entities.BloqueHorario;
 import com.clinica.agenda.repository.BloqueHorarioRepository;
-import com.clinica.agenda.services.BloqueHorarioServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-    
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,27 +13,30 @@ import java.util.List;
 public class BloqueHorarioServiceImpl implements BloqueHorarioServices {
 
     @Autowired
-    private BloqueHorarioRepository BloqueHorariorepository;
-
+    private BloqueHorarioRepository bloqueHorarioRepository;
 
     @Override
     public List<BloqueHorario> listarTodos() {
-        return BloqueHorariorepository.findAll();
+        return bloqueHorarioRepository.findAll();
     }
 
     @Override
     public BloqueHorario buscarPorId(Long id) {
-        return BloqueHorariorepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Bloque no encontrado"));
+        return bloqueHorarioRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Bloque no encontrado"));
     }
 
     @Override
     public BloqueHorario guardar(BloqueHorario bloque) {
-        return BloqueHorariorepository.save(bloque);
+        return bloqueHorarioRepository.save(bloque);
     }
 
     @Override
-    public BloqueHorario actualizar(Long id, BloqueHorario bloque) {
+    public BloqueHorario actualizar(
+            Long id,
+            BloqueHorario bloque) {
+
         BloqueHorario existente = buscarPorId(id);
 
         existente.setFecha(bloque.getFecha());
@@ -42,19 +44,31 @@ public class BloqueHorarioServiceImpl implements BloqueHorarioServices {
         existente.setHoraFin(bloque.getHoraFin());
         existente.setEstado(bloque.getEstado());
         existente.setDoctor(bloque.getDoctor());
-    
 
-        return BloqueHorariorepository.save(existente);
+        return bloqueHorarioRepository.save(existente);
     }
 
     @Override
     public void eliminar(Long id) {
-        BloqueHorariorepository.deleteById(id);
+        bloqueHorarioRepository.deleteById(id);
     }
 
     @Override
-    public List<BloqueHorario> porDoctorYFecha(Long doctorId, LocalDate fecha) {
-        return BloqueHorariorepository.findByDoctorIdAndFecha(doctorId, fecha);
+    public List<BloqueHorario> porDoctorYFecha(
+            Long doctorId,
+            LocalDate fecha) {
+
+        return bloqueHorarioRepository
+                .findByDoctorIdAndFecha(
+                        doctorId,
+                        fecha);
+    }
+
+    @Override
+    public List<BloqueHorario> obtenerBloquesDoctor(
+            Long doctorId) {
+
+        return bloqueHorarioRepository
+                .findByDoctorId(doctorId);
     }
 }
-
