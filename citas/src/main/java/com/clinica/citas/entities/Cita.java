@@ -24,7 +24,6 @@ public class Cita {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-
     private EstadoCita estado; //Heredamos datos de la solicitud de hora, pero con un estado específico para la cita
 
 }

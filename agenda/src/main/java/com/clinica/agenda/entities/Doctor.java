@@ -2,6 +2,7 @@ package com.clinica.agenda.entities;
 
 import java.time.LocalDate;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -10,9 +11,10 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.util.List;
-import com.clinica.agenda.entities.Sexo;
-import com.clinica.agenda.entities.EspecialidadDoctor;  
+import com.clinica.agenda.entities.EspecialidadDoctor;
+import com.clinica.agenda.enums.Sexo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.EnumType;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;    
@@ -38,8 +40,7 @@ public class Doctor {
     private String telefono;
     private String direccion;
 
-    @ManyToOne
-    @JoinColumn(name = "idSexo")
+    @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
     @OneToMany(mappedBy = "doctor")
