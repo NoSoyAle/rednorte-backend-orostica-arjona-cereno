@@ -6,14 +6,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.util.List;
-import com.clinica.agenda.entities.EspecialidadDoctor;
 import com.clinica.agenda.enums.Sexo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EnumType;
 
 import lombok.Getter;
@@ -26,7 +25,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="Doctor")
+@Table(name="doctor")
 
 public class Doctor {
     @Id 
@@ -46,9 +45,13 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor")
     private List<BloqueHorario> bloques;
 
-    @OneToMany(mappedBy = "doctor")
-    @JsonIgnore
-    private List<EspecialidadDoctor> doctorEspecialidades;
- 
+    @ManyToMany
+    @JoinTable(
+        name = "doctor_especialidad",
+        joinColumns = @JoinColumn(name = "doctor_id"),
+        inverseJoinColumns = @JoinColumn(name = "especialidad_id")
+    )
+    private List<Especialidad> especialidades;
+    
 
 }
