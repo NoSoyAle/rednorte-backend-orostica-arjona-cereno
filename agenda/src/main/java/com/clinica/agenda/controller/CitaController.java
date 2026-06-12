@@ -1,25 +1,57 @@
 package com.clinica.agenda.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.clinica.agenda.services.CitaService;
-import com.clinica.agenda.repository.CitaRpository;
-
+import com.clinica.agenda.entities.Cita;
+import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
 @RequestMapping("/api/citas")
 public class CitaController {
 
-    private final CitaService citaService;
-    private final CitaRpository citaRepository;
+    @Autowired
+    private CitaService citaService;
 
-
-    public CitaController(CitaService citaService, CitaRpository citaRepository) {
-        this.citaService = citaService;
-        this.citaRepository = citaRepository;
+    @GetMapping
+    public List<Cita> listarCitas() {
+        return citaService.listarTodos();
     }
 
+    @GetMapping("/doctor/{doctorId}")
+    public List<Cita> obtenerCitasDoctor(@PathVariable Long doctorId) {
+        return citaService.obtenerCitasDoctor(doctorId);
+    }
+
+    @GetMapping("/{id}")
+    public Cita obtenerCita(@PathVariable Long id) {
+        return citaService.buscarPorId(id);
+    }
+
+    @PostMapping
+    public Cita crearCita(@RequestBody Cita cita){
+        return citaService.guardar(cita);
+    }
     
+    @DeleteMapping("/{id}")
+    public void eliminarCita(@PathVariable Long id) {
+        citaService.eliminar(id);
+    }
+
+    @PutMapping("/{id}")
+    public Cita actualizarCita(
+            @PathVariable Long id,
+            @RequestBody Cita cita) {
+
+        return citaService.actualizar(id, cita);
+    }
 
     
 }
