@@ -16,17 +16,15 @@ public class EspecialidadDoctor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     private LocalDate fechaEgreso;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name = "especialidad_id")
+    @JoinColumn(name = "especialidad_id", nullable = false)
     private Especialidad especialidad;
 }
-
