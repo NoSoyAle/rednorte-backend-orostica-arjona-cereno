@@ -40,5 +40,6 @@ public class Cita {
 
     private Long pacienteId;
     private String nombrePaciente;
+    private String rutPaciente;
 
 }
