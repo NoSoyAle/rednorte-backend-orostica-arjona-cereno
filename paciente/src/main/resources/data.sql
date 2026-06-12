@@ -1,3 +1,5 @@
+DELETE FROM servicios_clinicos;
+
 INSERT INTO servicios_clinicos (nombre, precio_base, categoria, modalidad, disponible) VALUES
 ('Consulta General', 15000, 'CONSULTA', 'PRESENCIAL', true),
 ('Consulta de Especialidad', 25000, 'CONSULTA', 'PRESENCIAL', true),

@@ -1,11 +1,8 @@
-package com.clinica.autenticacion.security;
+package com.clinica.admin_service.config;
 
-import com.clinica.autenticacion.filter.JwtRequestFilter;
-import com.clinica.autenticacion.service.CustomUserDetailsService;
+import com.clinica.admin_service.filter.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -29,20 +26,13 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder passwordEncoder, CustomUserDetailsService userDetailsService) throws Exception {
-        AuthenticationManagerBuilder authBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-        return authBuilder.build();
-    }
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtRequestFilter jwtRequestFilter) throws Exception {
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

@@ -100,6 +100,17 @@
             "mainClass": "com.apireservas.apigateway.ApigatewayApplication",
             "projectName": "apigateway",
             "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AutenticacionApplication<autenticacion>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.clinica.autenticacion.AutenticacionApplication",
+            "projectName": "autenticacion",
+            "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
     ]

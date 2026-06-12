@@ -23,8 +23,12 @@ public class Usuario {
     private Long id;
     private String nombre;
     private String rut;
+    private String email;
     private String password;
+    private String telefono;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
+
+    private String estado;
 }
