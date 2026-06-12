@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class DoctorServicesImplement implements DoctorServices {
-    
+     
     @Autowired 
     private DoctorRepository doctorRepository;
 

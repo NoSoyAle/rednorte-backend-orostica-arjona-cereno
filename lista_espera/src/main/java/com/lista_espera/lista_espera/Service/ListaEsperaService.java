@@ -7,6 +7,8 @@ import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
+import com.lista_espera.lista_espera.client.AgendaClient;
+import com.lista_espera.lista_espera.dto.BloqueHorarioDto;
 import com.lista_espera.lista_espera.Model.EstadoEspera;
 import com.lista_espera.lista_espera.Model.ListaEspera;
 import com.lista_espera.lista_espera.Repository.ListaEsperaRepository;
@@ -24,6 +26,7 @@ public class ListaEsperaService {
             EstadoEspera.CONTACTADO);
 
     private final ListaEsperaRepository repo;
+    private final AgendaClient agendaClient;
 
     public ListaEspera crear(CrearListaEsperaRequest request) {
         validarCreacion(request);
@@ -130,6 +133,10 @@ public class ListaEsperaService {
             throw new NoSuchElementException("Solicitud de lista de espera no existe");
         }
         repo.deleteById(id);
+    }
+
+    public List<BloqueHorarioDto> obtenerBloquesDoctor(Long doctorId) {
+        return agendaClient.obtenerBloquesDoctor(doctorId);
     }
 
     private void validarCreacion(CrearListaEsperaRequest request) {

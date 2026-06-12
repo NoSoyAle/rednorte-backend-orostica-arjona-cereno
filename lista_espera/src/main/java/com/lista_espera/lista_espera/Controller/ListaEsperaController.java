@@ -20,6 +20,7 @@ import com.lista_espera.lista_espera.Model.EstadoEspera;
 import com.lista_espera.lista_espera.Service.ListaEsperaService;
 import com.lista_espera.lista_espera.dto.ActualizarEstadoRequest;
 import com.lista_espera.lista_espera.dto.AsignarHoraRequest;
+import com.lista_espera.lista_espera.dto.BloqueHorarioDto;
 import com.lista_espera.lista_espera.dto.CrearListaEsperaRequest;
 import com.lista_espera.lista_espera.dto.ListaEsperaResponse;
 
@@ -89,6 +90,11 @@ public class ListaEsperaController {
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         service.eliminar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/doctor/{doctorId}/bloques")
+    public List<BloqueHorarioDto> obtenerBloquesDoctor(@PathVariable Long doctorId) {
+        return service.obtenerBloquesDoctor(doctorId);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

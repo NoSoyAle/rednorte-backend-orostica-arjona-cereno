@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface BloqueHorarioRepository extends JpaRepository<BloqueHorario, Long> {
 
-    List<BloqueHorario> findByDoctorIdAndFecha(Long doctorId, LocalDate fecha);
+    List<BloqueHorario> findByDoctorIdAndFecha(Long doctorId,LocalDate fecha);
 
+    List<BloqueHorario> findByDoctorId(Long doctorId);
 }

@@ -1,12 +1,15 @@
-package com.clinica.agenda.security;
+package com.clinica.citas.security;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @Configuration
 public class Security {
-    @Bean
+
+        @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
@@ -15,7 +18,5 @@ public class Security {
                 .anyRequest().permitAll()
             );
 
-        return http.build();
-
-}}
- 
+        return http.build();}
+}
