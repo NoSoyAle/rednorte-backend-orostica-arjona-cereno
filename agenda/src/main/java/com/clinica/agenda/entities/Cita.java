@@ -2,24 +2,29 @@ package com.clinica.agenda.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import com.clinica.agenda.enums.Sexo;
 import com.clinica.agenda.enums.EstadoCita;
 import lombok.Getter;
 import lombok.NoArgsConstructor;    
 import lombok.Setter;
 import lombok.AllArgsConstructor;
 import jakarta.persistence.EnumType;
+import com.clinica.agenda.entities.Doctor;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+
 
 @Entity
 public class Cita {
     @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
    @ManyToOne

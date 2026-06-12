@@ -17,7 +17,7 @@ public class BloqueHorario {
     private LocalTime horaFin;
 
     private String estado;
-
+ 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
