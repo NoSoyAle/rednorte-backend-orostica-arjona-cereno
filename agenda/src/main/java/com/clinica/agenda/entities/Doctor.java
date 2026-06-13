@@ -42,8 +42,6 @@ public class Doctor {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    @OneToMany(mappedBy = "doctor")
-    private List<BloqueHorario> bloques;
 
     @ManyToMany
     @JoinTable(
