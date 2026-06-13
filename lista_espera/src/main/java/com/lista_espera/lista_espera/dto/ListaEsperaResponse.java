@@ -1,47 +1,41 @@
-package com.lista_espera.lista_espera.Model;
+package com.lista_espera.lista_espera.dto;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.lista_espera.lista_espera.Model.EstadoEspera;
+import com.lista_espera.lista_espera.Model.ListaEspera;
 
-@Entity
-@Table(name = "lista_espera")
-public class ListaEspera {
+public class ListaEsperaResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
     private Long pacienteId;
-
-    @Column(nullable = false)
     private Long especialidadId;
-
     private Long doctorId;
     private Long bloqueHorarioId;
-
-    @Column(nullable = false)
     private Integer prioridad;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private EstadoEspera estado;
-
-    @Column(nullable = false)
     private LocalDateTime fechaIngreso;
-
     private LocalDateTime fechaActualizacion;
     private LocalDateTime fechaAsignacion;
     private String motivo;
     private String observaciones;
+
+    public static ListaEsperaResponse fromEntity(ListaEspera listaEspera) {
+        ListaEsperaResponse response = new ListaEsperaResponse();
+        response.setId(listaEspera.getId());
+        response.setPacienteId(listaEspera.getPacienteId());
+        response.setEspecialidadId(listaEspera.getEspecialidadId());
+        response.setDoctorId(listaEspera.getDoctorId());
+        response.setBloqueHorarioId(listaEspera.getBloqueHorarioId());
+        response.setPrioridad(listaEspera.getPrioridad());
+        response.setEstado(listaEspera.getEstado());
+        response.setFechaIngreso(listaEspera.getFechaIngreso());
+        response.setFechaActualizacion(listaEspera.getFechaActualizacion());
+        response.setFechaAsignacion(listaEspera.getFechaAsignacion());
+        response.setMotivo(listaEspera.getMotivo());
+        response.setObservaciones(listaEspera.getObservaciones());
+        return response;
+    }
 
     public Long getId() {
         return id;
@@ -136,26 +130,6 @@ public class ListaEspera {
     }
 
     public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-
-    public ListaEspera() {
-    }
-
-    public ListaEspera(Long id, Long pacienteId, Long especialidadId, Long doctorId, Long bloqueHorarioId,
-            Integer prioridad, EstadoEspera estado, LocalDateTime fechaIngreso, LocalDateTime fechaActualizacion,
-            LocalDateTime fechaAsignacion, String motivo, String observaciones) {
-        this.id = id;
-        this.pacienteId = pacienteId;
-        this.especialidadId = especialidadId;
-        this.doctorId = doctorId;
-        this.bloqueHorarioId = bloqueHorarioId;
-        this.prioridad = prioridad;
-        this.estado = estado;
-        this.fechaIngreso = fechaIngreso;
-        this.fechaActualizacion = fechaActualizacion;
-        this.fechaAsignacion = fechaAsignacion;
-        this.motivo = motivo;
         this.observaciones = observaciones;
     }
 }

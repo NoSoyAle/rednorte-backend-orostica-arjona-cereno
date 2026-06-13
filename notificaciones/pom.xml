@@ -20,11 +20,11 @@
 
   <groupId>com.paciente</groupId>
 
-  <artifactId>auth-service</artifactId>
+  <artifactId>notificaciones</artifactId>
 
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>auth-service</name>
+  <name>notificaciones</name>
 
   <description/>
 
