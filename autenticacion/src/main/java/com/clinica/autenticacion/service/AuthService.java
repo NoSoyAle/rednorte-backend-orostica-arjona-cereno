@@ -1,49 +1,35 @@
 package com.clinica.autenticacion.service;
-/* import com.clinica.autenticacion.AutenticacionApplication;
-import java.util.List; */
+
+import com.clinica.autenticacion.dto.AuthResponse;
 import com.clinica.autenticacion.model.Usuario;
 import com.clinica.autenticacion.repository.UsuarioRepository;
+import com.clinica.autenticacion.util.JwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-  private final UsuarioRepository usuarioRepository;
-  private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public AuthService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
-        this.usuarioRepository = usuarioRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    @Autowired
+    private JwtUtil jwtUtil;
 
-    public String register(String nombre, String password) {
-
-        if (usuarioRepository.findByNombre(nombre).isPresent()) {
-            return "Usuario ya existe";
-        }
-
-        Usuario usuario = new Usuario();
-        usuario.setNombre(nombre);
-        usuario.setPassword(passwordEncoder.encode(password));
-
-        usuarioRepository.save(usuario);
-
-        return "Usuario registrado correctamente";
-    }
-
-    public String login(String nombre, String password) {
-
+    public AuthResponse login(String nombre, String password) {
         Usuario usuario = usuarioRepository.findByNombre(nombre)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + nombre));
 
         if (!passwordEncoder.matches(password, usuario.getPassword())) {
-            throw new RuntimeException("Contraseña incorrecta");
+            throw new RuntimeException("Contrasena incorrecta para usuario: " + nombre);
         }
 
-        return "Login exitoso";
+        String token = jwtUtil.generateToken(usuario.getNombre(), usuario.getRol());
+        
+        return new AuthResponse("Login exitoso", token, usuario.getRol(), usuario.getNombre());
     }
 }
-
-
