@@ -33,7 +33,7 @@ public class Cita {
 
     @ManyToOne
     @JoinColumn(name = "bloque_horario_id")
-    private BloqueHorario bloqueHorario;
+    private DisponibilidadDoctor bloqueHorario;
 
     @Enumerated(EnumType.STRING)
     private EstadoCita estado;
