@@ -38,6 +38,14 @@ public class EspecialidadController {
                 .orElseThrow(() -> new RuntimeException("Especialidad no encontrada con id: " + id));
     }
 
+    @PostMapping("/{id}")
+    public Especialidad actualizarEspecialidad(
+            @PathVariable Long id,
+            @RequestBody Especialidad especialidad) {
+
+        return especialidadService.actualizarEspecialidad(id, especialidad);
+    };
+
     @DeleteMapping("/{id}")
     public void eliminarEspecialidad(@PathVariable Long id) {
         especialidadService.eliminarEspecialidad(id);

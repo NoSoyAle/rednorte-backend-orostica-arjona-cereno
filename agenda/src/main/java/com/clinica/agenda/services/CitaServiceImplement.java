@@ -62,7 +62,6 @@ public class CitaServiceImplement implements CitaService {
 
         existente.setEstado(cita.getEstado());
         existente.setDoctor(cita.getDoctor());
-        existente.setBloqueHorario(cita.getBloqueHorario());
 
         return CitaRepo.save(existente);
     }

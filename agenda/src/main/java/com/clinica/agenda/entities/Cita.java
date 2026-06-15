@@ -13,7 +13,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
 import jakarta.persistence.EnumType;
-import com.clinica.agenda.entities.Doctor;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import jakarta.persistence.GenerationType;
 
 @Getter
 @Setter
@@ -23,23 +25,28 @@ import com.clinica.agenda.entities.Doctor;
 
 @Entity
 public class Cita {
+
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @ManyToOne
-    @JoinColumn(name = "bloque_horario_id")
-    private DisponibilidadDoctor bloqueHorario;
+    private Long pacienteId;
+
+    private String nombrePaciente;
+
+    private String rutPaciente;
+
+    private LocalDate fecha;
+
+    private LocalTime horaInicio;
+
+    private LocalTime horaFin;
 
     @Enumerated(EnumType.STRING)
     private EstadoCita estado;
-
-    private Long pacienteId;
-    private String nombrePaciente;
-    private String rutPaciente;
 
 }
