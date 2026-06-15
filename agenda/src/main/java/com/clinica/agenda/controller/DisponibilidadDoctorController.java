@@ -17,7 +17,7 @@ public class DisponibilidadDoctorController {
 
         this.service = service;
     }
-
+ 
     @GetMapping
     public List<DisponibilidadDoctor> listarTodos() {
         return service.listarTodos();
