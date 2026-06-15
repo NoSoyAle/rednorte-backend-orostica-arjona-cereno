@@ -9,8 +9,6 @@ public interface DoctorServices {
     Doctor crearDoctor(Doctor doctor);
     
     Doctor buscarDoctor(Long id);
-  
-
     void eliminarDoctor(Long id);
     //Este metodo no devuelve nada, solo elimina
 
