@@ -1,5 +1,7 @@
 package com.clinica.citas.entities;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import com.clinica.citas.enums.EstadoCita;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -24,7 +26,13 @@ public class Cita {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    private EstadoCita estado;
 
-    private EstadoCita estado; //Heredamos datos de la solicitud de hora, pero con un estado específico para la cita
-
+    private Long doctorId;
+    private Long pacienteId;
+    private Long especialidadId;
+    private LocalDate fechaCita;
+    private LocalTime horaCita;
+    private String motivoCancelacion;
+    private Boolean confirmada;
 }

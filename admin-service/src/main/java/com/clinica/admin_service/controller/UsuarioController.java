@@ -1,6 +1,7 @@
 package com.clinica.admin_service.controller;
 
 import com.clinica.admin_service.dto.DashboardKpiDto;
+import com.clinica.admin_service.dto.RegistroAdminDto;
 import com.clinica.admin_service.dto.RegistroDoctorRequest;
 import com.clinica.admin_service.dto.UsuarioEstadoDTO;
 import com.clinica.admin_service.model.Usuario;
@@ -64,5 +65,10 @@ public class UsuarioController {
     @GetMapping("/dashboard/kpis")
     public ResponseEntity<DashboardKpiDto> obtenerKpis() {
         return ResponseEntity.ok(usuarioService.obtenerMetricasDashboard());
+    }
+
+    @GetMapping("/registro")
+    public ResponseEntity<RegistroAdminDto> obtenerRegistroAdmin() {
+        return ResponseEntity.ok(usuarioService.obtenerRegistroAdmin());
     }
 }
