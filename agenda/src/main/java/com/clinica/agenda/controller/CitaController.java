@@ -61,6 +61,7 @@ public class CitaController {
             @PathVariable Long doctorId,
             @PathVariable LocalDate fecha) {
 
+                
         return citaService.obtenerHorariosDisponibles(
                 doctorId,
                 fecha);
