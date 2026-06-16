@@ -2,11 +2,10 @@ package com.clinica.agenda.entities;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Entity;  
 import java.util.List;
-import com.clinica.agenda.entities.EspecialidadDoctor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -28,10 +27,7 @@ public class Especialidad {
 
     private String nombreEsp;
 
-    @OneToMany(mappedBy = "especialidad")
+    @ManyToMany(mappedBy = "especialidades")
     @JsonIgnore
-    private List<EspecialidadDoctor> doctorEspecialidades;
-
- 
-
+    private List<Doctor> doctores;
 }
