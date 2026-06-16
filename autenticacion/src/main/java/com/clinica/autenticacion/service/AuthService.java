@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class AuthService {
 
@@ -31,5 +33,16 @@ public class AuthService {
         String token = jwtUtil.generateToken(usuario.getNombre(), usuario.getRol());
         
         return new AuthResponse("Login exitoso", token, usuario.getRol(), usuario.getNombre());
+    }
+
+    public Usuario register(Map<String, String> data) {
+        Usuario usuario = new Usuario();
+        usuario.setNombre(data.get("nombre"));
+        usuario.setEmail(data.get("email"));
+        usuario.setPassword(passwordEncoder.encode(data.get("password")));
+        usuario.setRol(data.getOrDefault("rol", "ADMIN"));
+        usuario.setTelefono(data.getOrDefault("telefono", ""));
+        usuario.setEstado(data.getOrDefault("estado", "activo"));
+        return usuarioRepository.save(usuario);
     }
 }

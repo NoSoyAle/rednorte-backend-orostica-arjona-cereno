@@ -20,6 +20,11 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @GetMapping("")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("admin-service funcionando correctamente");
+    }
+
     @PostMapping("/usuarios")
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario) {
         Usuario nuevoUsuario = usuarioService.guardarUsuario(usuario);

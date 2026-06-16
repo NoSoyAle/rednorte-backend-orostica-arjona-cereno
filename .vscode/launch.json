@@ -8,17 +8,6 @@
             "mainClass": "com.clinica.agenda.AgendaApplication",
             "projectName": "agenda",
             "args": "",
-            "envFile": "${workspaceFolder}/.env",
-            "vmArgs": " -Dcom.sun.management.jmxremote"
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-AgendaApplication<agenda>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.clinica.agenda.AgendaApplication",
-            "projectName": "agenda",
-            "args": "",
             "envFile": "${workspaceFolder}/.env"
         },
         {
@@ -69,17 +58,6 @@
             "mainClass": "com.clinica.admin_service.AdminServiceApplication",
             "projectName": "admin-service",
             "args": "",
-            "envFile": "${workspaceFolder}/.env",
-            "vmArgs": " -Dcom.sun.management.jmxremote"
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-PacienteApplication<paciente>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.paciente.paciente.PacienteApplication",
-            "projectName": "paciente",
-            "args": "",
             "envFile": "${workspaceFolder}/.env"
         },
         {
@@ -100,8 +78,7 @@
             "mainClass": "com.apireservas.apigateway.ApigatewayApplication",
             "projectName": "apigateway",
             "args": "",
-            "envFile": "${workspaceFolder}/.env",
-            "vmArgs": " -Dcom.sun.management.jmxremote"
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "type": "java",
