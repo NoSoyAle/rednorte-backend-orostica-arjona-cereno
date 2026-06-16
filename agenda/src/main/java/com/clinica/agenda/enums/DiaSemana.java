@@ -1,5 +1,7 @@
 package com.clinica.agenda.enums;
 
+import java.time.DayOfWeek;
+
 public enum DiaSemana {
     LUNES,
     MARTES,
@@ -7,6 +9,18 @@ public enum DiaSemana {
     JUEVES,
     VIERNES,
     SABADO,
-    DOMINGO
+    DOMINGO;
+
+        public static DiaSemana fromDayOfWeek(DayOfWeek dayOfWeek) {
+        return switch (dayOfWeek) {
+            case MONDAY -> LUNES;
+            case TUESDAY -> MARTES;
+            case WEDNESDAY -> MIERCOLES;
+            case THURSDAY -> JUEVES;
+            case FRIDAY -> VIERNES;
+            case SATURDAY -> SABADO;
+            case SUNDAY -> DOMINGO;
+        };
+    }
 
 }

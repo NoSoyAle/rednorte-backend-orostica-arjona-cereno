@@ -17,4 +17,8 @@ public interface CitaService {
 
     List<Cita> obtenerCitasDoctor(
             Long doctorId);
+
+    List<java.time.LocalTime> obtenerHorariosDisponibles(
+            Long doctorId,
+            java.time.LocalDate fecha);
 }

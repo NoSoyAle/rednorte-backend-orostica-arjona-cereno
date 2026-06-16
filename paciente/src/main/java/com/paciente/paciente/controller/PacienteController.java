@@ -15,7 +15,7 @@ import com.paciente.paciente.Model.Paciente;
 import com.paciente.paciente.service.PacienteService;
 
 @RestController 
-@RequestMapping("/pacientes")
+@RequestMapping("/api/pacientes")
 public class PacienteController {
 
     @Autowired

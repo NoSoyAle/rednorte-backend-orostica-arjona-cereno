@@ -8,11 +8,12 @@ import java.util.List;
 public interface DisponibilidadDoctorRepository
         extends JpaRepository<DisponibilidadDoctor, Long> {
 
-    List<DisponibilidadDoctor> findByDoctor_Id(Long doctorId);
+        List<DisponibilidadDoctor> findByDoctor_Id(Long doctorId);
 
-    List<DisponibilidadDoctor> findByDoctor_IdAndDiaSemana(
-            Long doctorId,
-            DiaSemana diaSemana
-    );
+        List<DisponibilidadDoctor> findByDoctor_IdAndDiaSemana(
+                Long doctorId,
+                DiaSemana diaSemana
+        );
+
 
 }

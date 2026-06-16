@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.clinica.agenda.services.CitaService;
 import com.clinica.agenda.entities.Cita;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
@@ -53,6 +56,14 @@ public class CitaController {
         return citaService.actualizar(id, cita);
     }
 
-    
+    @GetMapping("/disponibles/{doctorId}/{fecha}")
+    public List<LocalTime> obtenerHorariosDisponibles(
+            @PathVariable Long doctorId,
+            @PathVariable LocalDate fecha) {
+
+        return citaService.obtenerHorariosDisponibles(
+                doctorId,
+                fecha);
+    }
 }
   
