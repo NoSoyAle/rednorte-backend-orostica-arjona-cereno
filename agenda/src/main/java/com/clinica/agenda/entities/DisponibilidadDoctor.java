@@ -36,4 +36,4 @@ public class DisponibilidadDoctor {
     private Boolean activo;
 
     
-}
+} 
