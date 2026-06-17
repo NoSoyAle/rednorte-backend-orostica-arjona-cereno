@@ -5,19 +5,19 @@ import java.util.List;
 
 public interface DisponibilidadDoctorService {
 
-    List<DisponibilidadDoctor> listarTodos();
+        List<DisponibilidadDoctor> listarTodos();
 
-    DisponibilidadDoctor buscarPorId(Long id);
+        DisponibilidadDoctor buscarPorId(Long id);
 
-    DisponibilidadDoctor guardar(
-            DisponibilidadDoctor disponibilidadDoctor);
+        DisponibilidadDoctor guardar(
+                DisponibilidadDoctor disponibilidadDoctor);
 
-    DisponibilidadDoctor actualizar(
-            Long id,
-            DisponibilidadDoctor disponibilidadDoctor);
+        DisponibilidadDoctor actualizar(
+                Long id,
+                DisponibilidadDoctor disponibilidadDoctor);
 
-    void eliminar(Long id);
+        void eliminar(Long id);
 
-    List<DisponibilidadDoctor> buscarPorDoctor(
-            Long doctorId);
-}
+        List<DisponibilidadDoctor> buscarPorDoctor(
+                Long doctorId);
+        }
