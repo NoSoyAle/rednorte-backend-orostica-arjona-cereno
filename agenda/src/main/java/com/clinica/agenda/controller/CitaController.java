@@ -14,10 +14,13 @@ import com.clinica.agenda.entities.Cita;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
 @RequestMapping("/api/citas")
+@CrossOrigin(origins = "http://localhost:5173")
 public class CitaController {
 
     @Autowired
@@ -61,7 +64,7 @@ public class CitaController {
             @PathVariable Long doctorId,
             @PathVariable LocalDate fecha) {
 
-                
+
         return citaService.obtenerHorariosDisponibles(
                 doctorId,
                 fecha);
