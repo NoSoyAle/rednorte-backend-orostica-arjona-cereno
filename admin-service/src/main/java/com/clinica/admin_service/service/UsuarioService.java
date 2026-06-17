@@ -4,6 +4,7 @@ import com.clinica.admin_service.dto.RegistroDoctorRequest;
 import com.clinica.admin_service.dto.UsuarioEstadoDTO;
 import com.clinica.admin_service.model.Usuario;
 import com.clinica.admin_service.dto.DashboardKpiDto;
+import com.clinica.admin_service.dto.RegistroAdminDto;
 import java.util.List;
 
 public interface UsuarioService {
@@ -14,4 +15,5 @@ public interface UsuarioService {
     void eliminarUsuario(Long id);
     DashboardKpiDto obtenerMetricasDashboard();
     Usuario actualizarEstadoUsuario(Long id, UsuarioEstadoDTO dto);
+    RegistroAdminDto obtenerRegistroAdmin();
 }

@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +18,8 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
     @Value("${jwt.secret}")
     private String secret;
@@ -37,7 +41,9 @@ public class JwtUtil {
     }
 
     public String extractRole(String token) {
-        return extractAllClaims(token).get("role", String.class);
+        String role = extractAllClaims(token).get("role", String.class);
+        logger.info("Role extraido del token: " + role);
+        return role;
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -60,7 +66,10 @@ public class JwtUtil {
     public String generateToken(String username, String role) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
-        return createToken(claims, username);
+        logger.info("Generando token para username: " + username + ", role: " + role);
+        String token = createToken(claims, username);
+        logger.info("Token generado con longitud: " + token.length());
+        return token;
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
@@ -80,9 +89,12 @@ public class JwtUtil {
 
     public Boolean validateToken(String token) {
         try {
-            extractAllClaims(token);
-            return !isTokenExpired(token);
+            Claims claims = extractAllClaims(token);
+            boolean expired = isTokenExpired(token);
+            logger.info("Token validado - Subject: " + claims.getSubject() + ", Expirado: " + expired);
+            return !expired;
         } catch (Exception e) {
+            logger.error("Error al validar token: " + e.getClass().getSimpleName() + " - " + e.getMessage());
             return false;
         }
     }
