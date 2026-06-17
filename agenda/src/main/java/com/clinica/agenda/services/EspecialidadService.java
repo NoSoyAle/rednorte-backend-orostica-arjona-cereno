@@ -13,6 +13,7 @@ public interface EspecialidadService {
     //Porque la especialidad puede no existir, entonces se devuelve un Optional para manejar ese caso.
 
     void eliminarEspecialidad(Long id);
+    Especialidad actualizarEspecialidad(Long id, Especialidad especialidad);
 
 
 

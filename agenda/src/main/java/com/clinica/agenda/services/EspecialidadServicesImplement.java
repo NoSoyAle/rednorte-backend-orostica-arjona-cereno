@@ -33,4 +33,14 @@ public class EspecialidadServicesImplement implements EspecialidadService {
         return especialidadRepository.findById(id);
     }
 
+    @Override
+    public Especialidad actualizarEspecialidad(Long id, Especialidad especialidad) {
+        return especialidadRepository.findById(id)
+                .map(existingEspecialidad -> {
+                    existingEspecialidad.setNombreEsp(especialidad.getNombreEsp());
+                    return especialidadRepository.save(existingEspecialidad);
+                })
+                .orElseThrow(() -> new RuntimeException("Especialidad no encontrada con id: " + id));
+    }
+
 }

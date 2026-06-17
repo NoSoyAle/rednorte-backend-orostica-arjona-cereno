@@ -16,7 +16,7 @@ import com.clinica.agenda.services.EspecialidadService;
 
 @RestController
 @RequestMapping("/api/especialidad")
-
+ 
 
 public class EspecialidadController {
     @Autowired
@@ -37,6 +37,14 @@ public class EspecialidadController {
         return especialidadService.buscarEspecialidad(id)
                 .orElseThrow(() -> new RuntimeException("Especialidad no encontrada con id: " + id));
     }
+
+    @PostMapping("/{id}")
+    public Especialidad actualizarEspecialidad(
+            @PathVariable Long id,
+            @RequestBody Especialidad especialidad) {
+
+        return especialidadService.actualizarEspecialidad(id, especialidad);
+    };
 
     @DeleteMapping("/{id}")
     public void eliminarEspecialidad(@PathVariable Long id) {
