@@ -1,24 +1,37 @@
 package com.clinica.agenda.services;
 
 import com.clinica.agenda.entities.Cita;
+import com.clinica.agenda.entities.dto.CitaDetDTO;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public interface CitaService {
-    List<Cita> listarTodos();
+        List<Cita> listarTodos();
 
-    Cita buscarPorId(Long id);
+        Cita buscarPorId(Long id);
 
-    Cita guardar(Cita cita);
+        Cita guardar(Cita cita);
 
-    Cita actualizar(Long id, Cita cita);
+        Cita actualizar(Long id, Cita cita);
 
-    void eliminar(Long id);
+        void eliminar(Long id);
 
 
-    List<Cita> obtenerCitasDoctor(
-            Long doctorId);
+        List<Cita> obtenerCitasDoctor(
+        Long doctorId);
 
-    List<java.time.LocalTime> obtenerHorariosDisponibles(
-            Long doctorId,
-            java.time.LocalDate fecha);
+        List<java.time.LocalTime> obtenerHorariosDisponibles
+        (Long doctorId,
+                java.time.LocalDate fecha);
+
+
+
+        List<CitaDetDTO> obtenerPorFecha(
+                Long doctorId,
+                LocalDate fecha);        
+
+
+ 
 }

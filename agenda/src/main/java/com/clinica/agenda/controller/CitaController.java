@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.clinica.agenda.services.CitaService;
 import com.clinica.agenda.entities.Cita;
+import com.clinica.agenda.entities.dto.CitaDetDTO;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -69,5 +70,15 @@ public class CitaController {
                 doctorId,
                 fecha);
     }
+
+    @GetMapping("/doctor/{doctorId}/fecha/{fecha}")
+    public List<CitaDetDTO> obtenerPorFecha(
+            @PathVariable Long doctorId,
+            @PathVariable LocalDate fecha) {
+
+        return citaService.obtenerPorFecha(
+                doctorId,
+                fecha);
+    }
+
 }
-  
