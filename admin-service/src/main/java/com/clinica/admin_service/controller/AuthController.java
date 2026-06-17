@@ -4,6 +4,8 @@ import com.clinica.admin_service.model.Rol;
 import com.clinica.admin_service.model.Usuario;
 import com.clinica.admin_service.repository.UsuarioRepository;
 import com.clinica.admin_service.util.JwtUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +16,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -28,15 +32,34 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");
         String password = credentials.get("password");
+        
+        logger.info("=== Login attempt ===");
+        logger.info("Email: " + email);
 
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElse(null);
 
-        if (usuario == null || !passwordEncoder.matches(password, usuario.getPassword())) {
+        if (usuario == null) {
+            logger.warn("Usuario no encontrado con email: " + email);
+            return ResponseEntity.status(401).body(Map.of("error", "Credenciales inválidas"));
+        }
+        
+        logger.info("Usuario encontrado: " + usuario.getNombre() + ", Rol: " + usuario.getRol().name());
+
+        boolean passwordMatch = passwordEncoder.matches(password, usuario.getPassword());
+        logger.info("Password match: " + passwordMatch);
+        
+        if (!passwordMatch) {
+            logger.warn("Password incorrecto para: " + email);
             return ResponseEntity.status(401).body(Map.of("error", "Credenciales inválidas"));
         }
 
-        String token = jwtUtil.generateToken(usuario.getEmail(), "ROLE_" + usuario.getRol().name());
+        String roleWithPrefix = "ROLE_" + usuario.getRol().name();
+        logger.info("Generando token con rol: " + roleWithPrefix);
+        
+        String token = jwtUtil.generateToken(usuario.getEmail(), roleWithPrefix);
+        logger.info("Token generado exitosamente, longitud: " + token.length());
+        
         return ResponseEntity.ok(Map.of("token", token, "role", usuario.getRol().name()));
     }
 

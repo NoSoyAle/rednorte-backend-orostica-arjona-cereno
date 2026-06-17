@@ -23,7 +23,7 @@ public class AuthService {
     private JwtUtil jwtUtil;
 
     public AuthResponse login(String nombre, String password) {
-        Usuario usuario = usuarioRepository.findByNombre(nombre)
+        Usuario usuario = usuarioRepository.findFirstByNombre(nombre)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + nombre));
 
         if (!passwordEncoder.matches(password, usuario.getPassword())) {

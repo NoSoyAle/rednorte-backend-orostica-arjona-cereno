@@ -28,4 +28,12 @@ public class AuthController {
         Usuario usuario = service.register(data);
         return ResponseEntity.ok(Map.of("message", "Usuario registrado", "nombre", usuario.getNombre(), "rol", usuario.getRol()));
     }
+
+    @PostMapping("/register-admin")
+    public ResponseEntity<?> registerAdmin(@RequestBody Map<String, String> data) {
+        data.put("rol", "ADMIN");
+        data.putIfAbsent("estado", "activo");
+        Usuario usuario = service.register(data);
+        return ResponseEntity.ok(Map.of("message", "Admin registrado", "nombre", usuario.getNombre(), "rol", usuario.getRol()));
+    }
 }
