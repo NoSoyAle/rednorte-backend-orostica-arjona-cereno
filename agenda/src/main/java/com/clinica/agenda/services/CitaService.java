@@ -2,6 +2,7 @@ package com.clinica.agenda.services;
 
 import com.clinica.agenda.entities.Cita;
 import com.clinica.agenda.entities.dto.CitaDetDTO;
+import com.clinica.agenda.entities.dto.PacienteAtendidoDTO;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,7 +19,6 @@ public interface CitaService {
 
         void eliminar(Long id);
 
-
         List<Cita> obtenerCitasDoctor(
         Long doctorId);
 
@@ -26,12 +26,11 @@ public interface CitaService {
         (Long doctorId,
                 java.time.LocalDate fecha);
 
-
-
         List<CitaDetDTO> obtenerPorFecha(
                 Long doctorId,
                 LocalDate fecha);        
 
 
- 
+        List<PacienteAtendidoDTO> obtenerPacientesAtendidos(
+        Long doctorId);
 }

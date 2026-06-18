@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.web.reactive.function.client.WebClient;
 import com.clinica.agenda.entities.dto.PacienteDTO;
 import com.clinica.agenda.entities.dto.CitaDetDTO;
+import com.clinica.agenda.entities.dto.PacienteAtendidoDTO;
 import com.clinica.agenda.enums.DiaSemana;
 import com.clinica.agenda.enums.EstadoCita;
 import com.clinica.agenda.repository.DisponibilidadDoctorRepository;
@@ -66,10 +67,7 @@ public class CitaServiceImplement implements CitaService {
                                 fecha);
 
         return citas.stream()
-                .map(cita -> {
-
-                        PacienteDTO paciente =
-                                pacienteWebClient
+                .map(cita -> {PacienteDTO paciente =pacienteWebClient
                                         .get()
                                         .uri("/{id}",
                                                 cita.getPacienteId())
@@ -77,57 +75,62 @@ public class CitaServiceImplement implements CitaService {
                                         .bodyToMono(
                                                 PacienteDTO.class)
                                         .block();
-                        // System.out.println(paciente);
-
-                        CitaDetDTO dto =
-                                new CitaDetDTO();
-
-                        dto.setId(
-                                cita.getId());
-
-                        dto.setPacienteId(
-                                cita.getPacienteId());
-
+                        CitaDetDTO dto =new CitaDetDTO();
+                        dto.setId(cita.getId());
+                        dto.setPacienteId(cita.getPacienteId());
                         dto.setNombrePaciente(
                                 paciente.getNombre()
                                 + " "
                                 + paciente.getApellido());
-
-                        dto.setRutPaciente(
-                                paciente.getRut());
-
-                        dto.setFecha(
-                                cita.getFecha());
-
-                        dto.setHoraInicio(
-                                cita.getHoraInicio());
-
-                        dto.setHoraFin(
-                                cita.getHoraFin());
-
-                        dto.setEstado(
-                                cita.getEstado());
-
+                        dto.setRutPaciente(paciente.getRut());
+                        dto.setFecha(cita.getFecha());
+                        dto.setHoraInicio(cita.getHoraInicio());
+                        dto.setHoraFin(cita.getHoraFin());
+                        dto.setEstado(cita.getEstado());
                         return dto;
-
                 })
                 .toList();}
+
+        @Override
+        public List<PacienteAtendidoDTO> obtenerPacientesAtendidos(
+                Long doctorId) {
+        List<Cita> citas =CitaRepo.findByDoctor_Id(doctorId);
+        return citas.stream()
+                .filter(c ->
+                        c.getEstado() ==
+                        EstadoCita.REALIZADA)
+                .map(cita -> {PacienteDTO paciente =pacienteWebClient
+                                .get()
+                                .uri("/{id}",
+                                        cita.getPacienteId())
+                                .retrieve()
+                                .bodyToMono(
+                                        PacienteDTO.class)
+                                .block();
+                return new PacienteAtendidoDTO(
+                        paciente.getId(),
+                        paciente.getNombre()
+                                + " "
+                                + paciente.getApellido(),
+                        paciente.getRut()
+                );
+        })
+        .distinct()
+        .toList();
+        }
 
 
 
         @Override
         public Cita actualizar(Long id, Cita cita){
-        Cita existente = buscarPorId(id);
+                Cita existente = buscarPorId(id);
+                existente.setEstado(cita.getEstado());
+                existente.setDoctor(cita.getDoctor());
 
-        existente.setEstado(cita.getEstado());
-        existente.setDoctor(cita.getDoctor());
-
-        return CitaRepo.save(existente);}
+                return CitaRepo.save(existente);}
 
         @Override
-        public void eliminar(Long id){
-        CitaRepo.deleteById(id);}
-
+        public void eliminar(Long id){CitaRepo.deleteById(id);}
 
         @Override
         public List<Cita> obtenerCitasDoctor(Long doctorId) {
@@ -138,53 +141,53 @@ public class CitaServiceImplement implements CitaService {
                 Long doctorId,
                 LocalDate fecha) {
 
-        DiaSemana diaSemana =
-                convertirDiaSemana(fecha);
+                DiaSemana diaSemana =
+                        convertirDiaSemana(fecha);
 
-        DisponibilidadDoctor disponibilidad =
+                DisponibilidadDoctor disponibilidad =
                 disponibilidadDoctorRepository
                         .findByDoctor_IdAndDiaSemana(
                                 doctorId,
                                 diaSemana)
                         .stream()
                         .findFirst()
-                        .orElseThrow(() ->
-                                new RuntimeException(
-                                        "No existe disponibilidad para ese día"));
+                        .orElse(null);
+                        if (disponibilidad == null) {
+                                return new ArrayList<>();}
 
-        List<Cita> citas =
-                CitaRepo.findByDoctor_IdAndFecha(
-                        doctorId,
-                        fecha);
+                List<Cita> citas =
+                        CitaRepo.findByDoctor_IdAndFecha(
+                                doctorId,
+                                fecha);
 
-        Set<LocalTime> horasOcupadas =
-                citas.stream()
-                        .filter(c ->
-                                c.getEstado() != EstadoCita.CANCELADA)
-                        .map(Cita::getHoraInicio)
-                        .collect(Collectors.toSet());
+                Set<LocalTime> horasOcupadas =
+                        citas.stream()
+                                .filter(c ->
+                                        c.getEstado() != EstadoCita.CANCELADA)
+                                .map(Cita::getHoraInicio)
+                                .collect(Collectors.toSet());
 
-        List<LocalTime> disponibles =
-                new ArrayList<>();
+                List<LocalTime> disponibles =
+                        new ArrayList<>();
 
-        LocalTime horaActual =
-                disponibilidad.getHoraInicio();
+                LocalTime horaActual =
+                        disponibilidad.getHoraInicio();
 
-        while (horaActual.isBefore(
-                disponibilidad.getHoraFin())) {
+                while (horaActual.isBefore(
+                        disponibilidad.getHoraFin())) {
 
-                if (!horasOcupadas.contains(horaActual)) {
+                        if (!horasOcupadas.contains(horaActual)) {
 
-                disponibles.add(horaActual);
+                        disponibles.add(horaActual);
 
+                        }
+
+                        horaActual =
+                                horaActual.plusMinutes(
+                                        disponibilidad.getDuracionMinutos());
                 }
 
-                horaActual =
-                        horaActual.plusMinutes(
-                                disponibilidad.getDuracionMinutos());
-        }
-
-        return disponibles;
+                return disponibles;
         }
 
         private DiaSemana convertirDiaSemana(
