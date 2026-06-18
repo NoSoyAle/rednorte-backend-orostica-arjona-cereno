@@ -26,6 +26,10 @@ public class AuthService {
         Usuario usuario = usuarioRepository.findFirstByNombre(nombre)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + nombre));
 
+        if (!"activo".equalsIgnoreCase(usuario.getEstado())) {
+            throw new RuntimeException("Cuenta inactiva. Contacte al administrador.");
+        }
+
         if (!passwordEncoder.matches(password, usuario.getPassword())) {
             throw new RuntimeException("Contrasena incorrecta para usuario: " + nombre);
         }
