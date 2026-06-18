@@ -33,4 +33,47 @@ public class PacienteServiceImpl implements PacienteService {
     public void deletebyId(Long id) {
         pacienteRepository.deleteById(id);
     }
+
+    @Override
+    public Paciente buscarPorRut(String rut) {
+
+        return pacienteRepository.findByRut(rut)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Paciente no encontrado"));
+    }
+
+    @Override
+    public Paciente actualizar(
+            Long id,
+            Paciente paciente) {
+
+        Paciente existente =
+                pacienteRepository.findById(id)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Paciente no encontrado"));
+
+        existente.setNombre(
+                paciente.getNombre());
+
+        existente.setApellido(
+                paciente.getApellido());
+
+        existente.setEmail(
+                paciente.getEmail());
+
+        existente.setTelefono(
+                paciente.getTelefono());
+
+        existente.setFechaNacimiento(
+                paciente.getFechaNacimiento());
+
+        existente.setDireccion(
+                paciente.getDireccion());
+
+        return pacienteRepository.save(
+                existente);
+    }
+
 }
