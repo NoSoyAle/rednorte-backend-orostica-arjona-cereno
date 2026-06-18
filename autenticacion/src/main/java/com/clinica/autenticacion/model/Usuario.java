@@ -17,6 +17,10 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+<<<<<<< HEAD
+=======
+    @Column(unique = true)
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
     private String nombre;
     private String email;
     private String password;

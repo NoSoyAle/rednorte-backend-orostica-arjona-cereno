@@ -1,5 +1,10 @@
 package com.clinica.agenda.entities;
 
+<<<<<<< HEAD
+=======
+import java.time.LocalDate;
+import java.time.LocalTime;
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -45,4 +50,8 @@ public class Cita {
     @Enumerated(EnumType.STRING)
     private EstadoCita estado;
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661

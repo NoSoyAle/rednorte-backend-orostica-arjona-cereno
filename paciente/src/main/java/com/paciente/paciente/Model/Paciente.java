@@ -7,7 +7,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 @Entity
 @Table(name = "pacientes")
 public class Paciente {

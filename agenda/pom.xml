@@ -80,11 +80,14 @@
   </dependency>
 
   <dependency>
+<<<<<<< HEAD
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-amqp</artifactId>
   </dependency>
 
   <dependency>
+=======
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 
     <groupId>io.jsonwebtoken</groupId>
 
@@ -117,7 +120,22 @@
 
     </dependency>
 
+<<<<<<< HEAD
    
+=======
+
+    <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 
     <dependency>
 

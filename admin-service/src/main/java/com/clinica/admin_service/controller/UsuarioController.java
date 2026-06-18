@@ -1,6 +1,10 @@
 package com.clinica.admin_service.controller;
 
 import com.clinica.admin_service.dto.DashboardKpiDto;
+<<<<<<< HEAD
+=======
+import com.clinica.admin_service.dto.RegistroAdminDto;
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 import com.clinica.admin_service.dto.RegistroDoctorRequest;
 import com.clinica.admin_service.dto.UsuarioEstadoDTO;
 import com.clinica.admin_service.model.Usuario;
@@ -20,6 +24,14 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+<<<<<<< HEAD
+=======
+    @GetMapping("")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("admin-service funcionando correctamente");
+    }
+
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
     @PostMapping("/usuarios")
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario) {
         Usuario nuevoUsuario = usuarioService.guardarUsuario(usuario);
@@ -60,4 +72,12 @@ public class UsuarioController {
     public ResponseEntity<DashboardKpiDto> obtenerKpis() {
         return ResponseEntity.ok(usuarioService.obtenerMetricasDashboard());
     }
+<<<<<<< HEAD
+=======
+
+    @GetMapping("/registro")
+    public ResponseEntity<RegistroAdminDto> obtenerRegistroAdmin() {
+        return ResponseEntity.ok(usuarioService.obtenerRegistroAdmin());
+    }
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 }

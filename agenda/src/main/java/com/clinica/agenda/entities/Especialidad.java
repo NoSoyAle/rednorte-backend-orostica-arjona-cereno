@@ -23,7 +23,11 @@ public class Especialidad {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
     private Long idEspecialidad;
+=======
+    private Long id;
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 
     private String nombreEsp;
 

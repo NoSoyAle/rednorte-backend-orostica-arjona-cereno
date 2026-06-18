@@ -26,12 +26,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         final String authorizationHeader = request.getHeader("Authorization");
+<<<<<<< HEAD
+=======
+        
+        logger.info("=== JWT Filter ===");
+        logger.info("Authorization header: " + authorizationHeader);
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 
         String username = null;
         String jwtToken = null;
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwtToken = authorizationHeader.substring(7);
+<<<<<<< HEAD
             try {
                 username = jwtUtil.extractUsername(jwtToken);
             } catch (Exception e) {
@@ -46,6 +53,44 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                         username, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role)));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
+=======
+            logger.info("Token extraido: " + jwtToken.substring(0, Math.min(20, jwtToken.length())) + "...");
+            try {
+                username = jwtUtil.extractUsername(jwtToken);
+                logger.info("Username extraido del token: " + username);
+            } catch (Exception e) {
+                logger.error("Token JWT invalido o expirado: " + e.getMessage());
+            }
+        } else {
+            logger.warn("No se encontro header Authorization con Bearer");
+        }
+
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            logger.info("Validando token para usuario: " + username);
+            boolean isValid = jwtUtil.validateToken(jwtToken);
+            logger.info("Token valido: " + isValid);
+            
+            if (isValid) {
+                String role = jwtUtil.extractRole(jwtToken);
+                logger.info("Rol extraido del token: " + role);
+                
+                if (!role.startsWith("ROLE_")) {
+                    role = "ROLE_" + role;
+                    logger.info("Rol ajustado a: " + role);
+                }
+                
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                        username, null, Collections.singletonList(new SimpleGrantedAuthority(role)));
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+                logger.info("Autenticacion establecida en SecurityContext con autoridad: " + role);
+            } else {
+                logger.error("Token no paso la validacion");
+            }
+        } else if (username == null) {
+            logger.warn("Username es null, no se establecera autenticacion");
+        } else {
+            logger.info("Ya existe autenticacion en SecurityContext");
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
         }
 
         chain.doFilter(request, response);

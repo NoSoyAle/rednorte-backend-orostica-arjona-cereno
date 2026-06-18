@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+<<<<<<< HEAD
+=======
+import org.springframework.web.bind.annotation.PutMapping;
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,4 +44,24 @@ public class PacienteController {
     public void eliminar(@PathVariable Long id) {
         pacienteService.deletebyId(id);
     }
+<<<<<<< HEAD
+=======
+
+    @GetMapping("/rut/{rut}")
+    public Paciente buscarPorRut(
+            @PathVariable String rut) {
+
+        return pacienteService
+                .buscarPorRut(rut);
+    }
+
+    @PutMapping("/{id}")
+    public Paciente actualizar(
+            @PathVariable Long id,
+            @RequestBody Paciente paciente) {
+
+        return pacienteService
+                .actualizar(id, paciente);
+    }
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 }

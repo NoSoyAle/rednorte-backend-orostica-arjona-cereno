@@ -73,8 +73,11 @@
 
   </dependency>
 
+<<<<<<< HEAD
   
 
+=======
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
   <dependency>
 
     <groupId>io.jsonwebtoken</groupId>
@@ -124,6 +127,7 @@
 
     </dependency>
 
+<<<<<<< HEAD
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-amqp</artifactId>
@@ -136,6 +140,8 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
+=======
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 
     <dependency>
 
@@ -284,4 +290,8 @@
 
   </build>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 </project>

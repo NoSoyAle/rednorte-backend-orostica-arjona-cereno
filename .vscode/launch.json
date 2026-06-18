@@ -8,6 +8,7 @@
             "mainClass": "com.clinica.agenda.AgendaApplication",
             "projectName": "agenda",
             "args": "",
+<<<<<<< HEAD
             "envFile": "${workspaceFolder}/.env",
             "vmArgs": " -Dcom.sun.management.jmxremote"
         },
@@ -19,6 +20,8 @@
             "mainClass": "com.clinica.agenda.AgendaApplication",
             "projectName": "agenda",
             "args": "",
+=======
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
             "envFile": "${workspaceFolder}/.env"
         },
         {
@@ -69,6 +72,7 @@
             "mainClass": "com.clinica.admin_service.AdminServiceApplication",
             "projectName": "admin-service",
             "args": "",
+<<<<<<< HEAD
             "envFile": "${workspaceFolder}/.env",
             "vmArgs": " -Dcom.sun.management.jmxremote"
         },
@@ -80,6 +84,8 @@
             "mainClass": "com.paciente.paciente.PacienteApplication",
             "projectName": "paciente",
             "args": "",
+=======
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
             "envFile": "${workspaceFolder}/.env"
         },
         {
@@ -100,8 +106,12 @@
             "mainClass": "com.apireservas.apigateway.ApigatewayApplication",
             "projectName": "apigateway",
             "args": "",
+<<<<<<< HEAD
             "envFile": "${workspaceFolder}/.env",
             "vmArgs": " -Dcom.sun.management.jmxremote"
+=======
+            "envFile": "${workspaceFolder}/.env"
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
         },
         {
             "type": "java",
