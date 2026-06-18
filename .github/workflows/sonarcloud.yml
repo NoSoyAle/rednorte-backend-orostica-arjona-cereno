@@ -36,7 +36,7 @@ jobs:
         run: |
           mvn sonar:sonar \
             -Dsonar.projectKey=rednorte-admin-service \
-            -Dsonar.organization=rednorte-org \
+            -Dsonar.organization=rednorte-organization \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
@@ -69,7 +69,7 @@ jobs:
         run: |
           mvn sonar:sonar \
             -Dsonar.projectKey=rednorte-paciente \
-            -Dsonar.organization=rednorte-org \
+            -Dsonar.organization=rednorte-organization \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
