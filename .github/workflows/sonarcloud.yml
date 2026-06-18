@@ -78,7 +78,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           STATUS=$(curl -s -u $SONAR_TOKEN: \
-            "https://sonarcloud.io/api/qualitygates/project_status?projectKey=rednorte-organization_rednorte-admin-service" | \
+            "https://sonarcloud.io/api/qualitygates/project_status?projectKey=catvstrofe_rednorte-admin-service" | \
             jq -r '.projectStatus.status')
           echo "Admin Service Quality Gate: $STATUS"
           if [ "$STATUS" != "OK" ]; then
@@ -91,7 +91,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           STATUS=$(curl -s -u $SONAR_TOKEN: \
-            "https://sonarcloud.io/api/qualitygates/project_status?projectKey=rednorte-organization_rednorte-paciente" | \
+            "https://sonarcloud.io/api/qualitygates/project_status?projectKey=catvstrofe_rednorte-paciente-service" | \
             jq -r '.projectStatus.status')
           echo "Paciente Service Quality Gate: $STATUS"
           if [ "$STATUS" != "OK" ]; then
