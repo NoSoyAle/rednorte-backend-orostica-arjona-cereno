@@ -5,6 +5,6 @@ import com.clinica.agenda.entities.Doctor;
 import java.util.List;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
-    List<Doctor> findByEspecialidad_Id(
+    List<Doctor> findByEspecialidades_Id(
         Long especialidadId);
 }
