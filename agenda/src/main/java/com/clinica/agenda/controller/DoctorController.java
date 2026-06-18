@@ -1,6 +1,7 @@
 package com.clinica.agenda.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +15,12 @@ import com.clinica.agenda.entities.Especialidad;
 import com.clinica.agenda.repository.EspecialidadRepository;
 import com.clinica.agenda.services.DoctorServices;
 
+
 import java.util.List;  
 
 @RestController
 @RequestMapping("/api/doctor")
+@CrossOrigin(origins = "http://localhost:5173")
 public class DoctorController {
     @Autowired
     private DoctorServices doctorServices;
