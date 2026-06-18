@@ -33,11 +33,11 @@ public class DoctorServicesImplement implements DoctorServices {
                             .stream()
                             .map(especialidad ->
                                     especialidadRepository.findById(
-                                            especialidad.getIdEspecialidad())
+                                            especialidad.getId())
                                             .orElseThrow(() ->
                                                     new RuntimeException(
                                                             "Especialidad no encontrada: "
-                                                            + especialidad.getIdEspecialidad())))
+                                                            + especialidad.getId())))
                             .toList();
 
                 doctor.setEspecialidades(especialidadesExistentes);
@@ -78,11 +78,11 @@ public class DoctorServicesImplement implements DoctorServices {
                     doctorActualizado.getEspecialidades()
                             .stream()
                             .map(e -> especialidadRepository
-                                    .findById(e.getIdEspecialidad())
+                                    .findById(e.getId())
                                     .orElseThrow(() ->
                                             new RuntimeException(
                                                     "Especialidad no encontrada: "
-                                                    + e.getIdEspecialidad())))
+                                                    + e.getId())))
                             .collect(java.util.stream.Collectors.toList());
 
             doctorExistente.getEspecialidades().clear();
@@ -97,7 +97,7 @@ public class DoctorServicesImplement implements DoctorServices {
             Long especialidadId) {
 
         return doctorRepository
-                .findByEspecialidad_Id(
+                .findByEspecialidades_Id(
                         especialidadId);
     }
 
