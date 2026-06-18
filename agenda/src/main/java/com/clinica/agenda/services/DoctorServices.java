@@ -14,7 +14,7 @@ public interface DoctorServices {
     //Este metodo no devuelve nada, solo elimina
     List<Doctor> buscarPorEspecialidad(
         Long especialidadId);
-
+    Doctor buscarPorRut(String rut);
 
     List<Especialidad> obtenerEspecialidadesDoctor(
         Long doctorId);

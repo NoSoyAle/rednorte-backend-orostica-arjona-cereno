@@ -74,5 +74,11 @@ public class DoctorController {
                 .obtenerEspecialidadesDoctor(
                         doctorId);
     }
+    @GetMapping("/rut/{rut}")
+    public Doctor buscarPorRut(
+            @PathVariable String rut) {
+
+        return doctorServices.buscarPorRut(rut);
+    }
 }
 

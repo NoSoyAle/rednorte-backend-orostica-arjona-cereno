@@ -109,12 +109,13 @@ public class CitaServiceImplement implements CitaService {
                                 .block();
                 return new PacienteAtendidoDTO(
                         paciente.getId(),
-                        paciente.getNombre()
-                                + " "
-                                + paciente.getApellido(),
-                        paciente.getRut()
-                );
-        })
+                        paciente.getNombre(),
+                        paciente.getApellido(),
+                        paciente.getRut(),
+                        paciente.getEmail(),
+                        paciente.getTelefono()
+                        );
+                })
         .distinct()
         .toList();
         }
