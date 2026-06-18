@@ -28,12 +28,15 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+<<<<<<< HEAD
+=======
 		<sonar.projectKey>catvstrofe_rednorte-paciente-service</sonar.projectKey>
 		<sonar.projectName>RedNorte Paciente Service</sonar.projectName>
 		<sonar.organization>catvstrofe</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 	</properties>
 	<dependencies>
 
@@ -61,11 +64,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<<<<<<< HEAD
+=======
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 	</dependencies>
 
 	<build>
@@ -118,6 +124,8 @@
 					</execution>
 				</executions>
 			</plugin>
+<<<<<<< HEAD
+=======
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -143,6 +151,7 @@
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.10.0.2594</version>
 			</plugin>
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 		</plugins>
 	</build>
 

@@ -1,13 +1,24 @@
 package com.clinica.admin_service.service;
 
 import com.clinica.admin_service.dto.DashboardKpiDto;
+<<<<<<< HEAD
+=======
 import com.clinica.admin_service.dto.RegistroAdminDto;
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 import com.clinica.admin_service.dto.RegistroDoctorRequest;
 import com.clinica.admin_service.dto.UsuarioEstadoDTO;
 import com.clinica.admin_service.model.Rol;
 import com.clinica.admin_service.model.Usuario;
 import com.clinica.admin_service.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+=======
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -34,6 +46,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+<<<<<<< HEAD
+    @Override
+    public Usuario guardarUsuario(Usuario usuario) {
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        return usuarioRepository.save(usuario);
+=======
     @Autowired
     private RestTemplate restTemplate;
 
@@ -51,6 +69,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         sincronizarConAutenticacion(savedUsuario, rawPassword);
         
         return savedUsuario;
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
     }
 
     @Override
@@ -74,6 +93,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         doctor.setRol(Rol.DOCTOR);
         doctor.setEstado("ACTIVO");
 
+<<<<<<< HEAD
+        return usuarioRepository.save(doctor);
+=======
         Usuario savedDoctor = usuarioRepository.save(doctor);
         
         sincronizarConAutenticacion(savedDoctor, request.getPassword());
@@ -119,6 +141,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         } catch (Exception e) {
             System.err.println("Error al sincronizar con agenda: " + e.getMessage());
         }
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
     }
 
     @Override
@@ -163,6 +186,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setEstado(dto.getEstado());
         return usuarioRepository.save(usuario);
     }
+<<<<<<< HEAD
+=======
 
     @Override
     public RegistroAdminDto obtenerRegistroAdmin() {
@@ -259,4 +284,5 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return citas;
     }
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 }

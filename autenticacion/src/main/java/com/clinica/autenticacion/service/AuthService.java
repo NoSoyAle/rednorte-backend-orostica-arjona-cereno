@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
+=======
 import java.util.Map;
 
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 @Service
 public class AuthService {
 
@@ -23,6 +26,11 @@ public class AuthService {
     private JwtUtil jwtUtil;
 
     public AuthResponse login(String nombre, String password) {
+<<<<<<< HEAD
+        Usuario usuario = usuarioRepository.findByNombre(nombre)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + nombre));
+
+=======
         Usuario usuario = usuarioRepository.findFirstByNombre(nombre)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + nombre));
 
@@ -30,6 +38,7 @@ public class AuthService {
             throw new RuntimeException("Cuenta inactiva. Contacte al administrador.");
         }
 
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
         if (!passwordEncoder.matches(password, usuario.getPassword())) {
             throw new RuntimeException("Contrasena incorrecta para usuario: " + nombre);
         }
@@ -38,6 +47,8 @@ public class AuthService {
         
         return new AuthResponse("Login exitoso", token, usuario.getRol(), usuario.getNombre());
     }
+<<<<<<< HEAD
+=======
 
     public Usuario register(Map<String, String> data) {
         Usuario usuario = new Usuario();
@@ -49,4 +60,5 @@ public class AuthService {
         usuario.setEstado(data.getOrDefault("estado", "activo"));
         return usuarioRepository.save(usuario);
     }
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 }

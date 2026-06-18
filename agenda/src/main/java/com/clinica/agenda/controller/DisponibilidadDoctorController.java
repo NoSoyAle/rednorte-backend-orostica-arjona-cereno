@@ -8,7 +8,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/disponibilidad")
+<<<<<<< HEAD
+=======
 @CrossOrigin(origins = "http://localhost:5173")
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 public class DisponibilidadDoctorController {
 
     private final DisponibilidadDoctorService service;

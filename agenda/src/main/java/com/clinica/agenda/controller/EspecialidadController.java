@@ -1,7 +1,10 @@
 package com.clinica.agenda.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
+=======
 import org.springframework.web.bind.annotation.CrossOrigin;
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +20,12 @@ import com.clinica.agenda.services.EspecialidadService;
 
 @RestController
 @RequestMapping("/api/especialidad")
+<<<<<<< HEAD
+ 
+
+=======
 @CrossOrigin(origins = "http://localhost:5173")
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 public class EspecialidadController {
     @Autowired
     private EspecialidadService especialidadService;

@@ -33,6 +33,8 @@ public class PacienteServiceImpl implements PacienteService {
     public void deletebyId(Long id) {
         pacienteRepository.deleteById(id);
     }
+<<<<<<< HEAD
+=======
 
     @Override
     public Paciente buscarPorRut(String rut) {
@@ -76,4 +78,5 @@ public class PacienteServiceImpl implements PacienteService {
                 existente);
     }
 
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 }

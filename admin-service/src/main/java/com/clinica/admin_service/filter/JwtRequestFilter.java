@@ -26,15 +26,34 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         final String authorizationHeader = request.getHeader("Authorization");
+<<<<<<< HEAD
+=======
         
         logger.info("=== JWT Filter ===");
         logger.info("Authorization header: " + authorizationHeader);
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 
         String username = null;
         String jwtToken = null;
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwtToken = authorizationHeader.substring(7);
+<<<<<<< HEAD
+            try {
+                username = jwtUtil.extractUsername(jwtToken);
+            } catch (Exception e) {
+                logger.warn("Token JWT invalido o expirado");
+            }
+        }
+
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (jwtUtil.validateToken(jwtToken)) {
+                String role = jwtUtil.extractRole(jwtToken);
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                        username, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role)));
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+            }
+=======
             logger.info("Token extraido: " + jwtToken.substring(0, Math.min(20, jwtToken.length())) + "...");
             try {
                 username = jwtUtil.extractUsername(jwtToken);
@@ -71,6 +90,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             logger.warn("Username es null, no se establecera autenticacion");
         } else {
             logger.info("Ya existe autenticacion en SecurityContext");
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
         }
 
         chain.doFilter(request, response);

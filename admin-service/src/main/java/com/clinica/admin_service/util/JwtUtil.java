@@ -4,8 +4,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+<<<<<<< HEAD
+=======
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,8 +22,11 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
+<<<<<<< HEAD
+=======
     private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
     @Value("${jwt.secret}")
     private String secret;
 
@@ -41,9 +47,13 @@ public class JwtUtil {
     }
 
     public String extractRole(String token) {
+<<<<<<< HEAD
+        return extractAllClaims(token).get("role", String.class);
+=======
         String role = extractAllClaims(token).get("role", String.class);
         logger.info("Role extraido del token: " + role);
         return role;
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -66,10 +76,14 @@ public class JwtUtil {
     public String generateToken(String username, String role) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
+<<<<<<< HEAD
+        return createToken(claims, username);
+=======
         logger.info("Generando token para username: " + username + ", role: " + role);
         String token = createToken(claims, username);
         logger.info("Token generado con longitud: " + token.length());
         return token;
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
@@ -89,12 +103,18 @@ public class JwtUtil {
 
     public Boolean validateToken(String token) {
         try {
+<<<<<<< HEAD
+            extractAllClaims(token);
+            return !isTokenExpired(token);
+        } catch (Exception e) {
+=======
             Claims claims = extractAllClaims(token);
             boolean expired = isTokenExpired(token);
             logger.info("Token validado - Subject: " + claims.getSubject() + ", Expirado: " + expired);
             return !expired;
         } catch (Exception e) {
             logger.error("Error al validar token: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+>>>>>>> 0ce737d3fdd4d17416de0646b83f3901e9f1a661
             return false;
         }
     }
