@@ -46,6 +46,11 @@ public class AuthController {
         
         logger.info("Usuario encontrado: " + usuario.getNombre() + ", Rol: " + usuario.getRol().name());
 
+        if (!"ACTIVO".equalsIgnoreCase(usuario.getEstado())) {
+            logger.warn("Cuenta inactiva para: " + email);
+            return ResponseEntity.status(401).body(Map.of("error", "Cuenta inactiva. Contacte al administrador."));
+        }
+
         boolean passwordMatch = passwordEncoder.matches(password, usuario.getPassword());
         logger.info("Password match: " + passwordMatch);
         
