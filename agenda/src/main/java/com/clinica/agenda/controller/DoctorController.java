@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.clinica.agenda.entities.Doctor;
+import com.clinica.agenda.entities.Especialidad;
 import com.clinica.agenda.repository.EspecialidadRepository;
 import com.clinica.agenda.services.DoctorServices;
 
@@ -54,5 +55,21 @@ public class DoctorController {
         return doctorServices.actualizarDoctor(id, doctor);
     }
 
+    @GetMapping("/especialidad/{idEspecialidad}")
+    public List<Doctor> obtenerPorEspecialidad(
+            @PathVariable Long idEspecialidad) {
+
+        return doctorServices.buscarPorEspecialidad(
+                idEspecialidad);
+    }
+
+    @GetMapping("/{doctorId}/especialidades")
+    public List<Especialidad> obtenerEspecialidadesDoctor(
+            @PathVariable Long doctorId) {
+
+        return doctorServices
+                .obtenerEspecialidadesDoctor(
+                        doctorId);
+    }
 }
  

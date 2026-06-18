@@ -92,4 +92,25 @@ public class DoctorServicesImplement implements DoctorServices {
         return doctorRepository.save(doctorExistente);
     }
 
+    @Override
+    public List<Doctor> buscarPorEspecialidad(
+            Long especialidadId) {
+
+        return doctorRepository
+                .findByEspecialidad_Id(
+                        especialidadId);
+    }
+
+    @Override
+    public List<Especialidad> obtenerEspecialidadesDoctor(
+            Long doctorId) {
+
+        Doctor doctor =
+                doctorRepository.findById(doctorId)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Doctor no encontrado"));
+
+        return doctor.getEspecialidades();
+    }
 }

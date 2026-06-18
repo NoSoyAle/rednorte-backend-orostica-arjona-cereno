@@ -1,6 +1,7 @@
 package com.clinica.agenda.services;
 import java.util.List;
 import com.clinica.agenda.entities.Doctor;
+import com.clinica.agenda.entities.Especialidad;
 
 
 public interface DoctorServices {
@@ -11,6 +12,12 @@ public interface DoctorServices {
     Doctor buscarDoctor(Long id);
     void eliminarDoctor(Long id);
     //Este metodo no devuelve nada, solo elimina
+    List<Doctor> buscarPorEspecialidad(
+        Long especialidadId);
+
+
+    List<Especialidad> obtenerEspecialidadesDoctor(
+        Long doctorId);
 
 
 
