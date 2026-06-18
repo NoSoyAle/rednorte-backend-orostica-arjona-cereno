@@ -13,6 +13,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.util.List;
 import com.clinica.agenda.enums.Sexo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.EnumType;
 
 import lombok.Getter;
@@ -44,6 +46,7 @@ public class Doctor {
 
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
         name = "doctor_especialidad",
         joinColumns = @JoinColumn(name = "doctor_id"),
