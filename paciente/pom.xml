@@ -28,7 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-		<sonar.projectKey>rednorte-paciente</sonar.projectKey>
+		<sonar.projectKey>rednorte-organization_rednorte-paciente</sonar.projectKey>
 		<sonar.projectName>RedNorte Paciente Service</sonar.projectName>
 		<sonar.organization>rednorte-organization</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
