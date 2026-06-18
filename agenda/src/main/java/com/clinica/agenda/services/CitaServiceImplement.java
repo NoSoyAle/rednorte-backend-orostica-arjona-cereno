@@ -8,6 +8,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.clinica.agenda.entities.dto.PacienteDTO;
 import com.clinica.agenda.enums.DiaSemana;
 import com.clinica.agenda.repository.DisponibilidadDoctorRepository;
+import com.clinica.agenda.dto.NotificacionCitaDTO;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -30,6 +33,12 @@ public class CitaServiceImplement implements CitaService {
 
     @Autowired
     private WebClient pacienteWebClient;
+
+    @Autowired
+    private RabbitMQProducer rabbitMQProducer;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Override
     public List <Cita> listarTodos(){
@@ -56,8 +65,9 @@ public class CitaServiceImplement implements CitaService {
             throw new RuntimeException("Paciente no encontrado");
         }
 
-
-        return CitaRepo.save(cita);
+        Cita citaGuardada = CitaRepo.save(cita);
+        enviarNotificacion("CITA_CREADA", citaGuardada, paciente.getEmail(), paciente.getNombre(), paciente.getApellido());
+        return citaGuardada;
     }
 
 
@@ -68,7 +78,21 @@ public class CitaServiceImplement implements CitaService {
         existente.setEstado(cita.getEstado());
         existente.setDoctor(cita.getDoctor());
 
-        return CitaRepo.save(existente);
+        Cita citaActualizada = CitaRepo.save(existente);
+
+        PacienteDTO paciente = pacienteWebClient
+                .get()
+                .uri("/" + citaActualizada.getPacienteId())
+                .retrieve()
+                .bodyToMono(PacienteDTO.class)
+                .block();
+
+        if (paciente != null) {
+            String tipo = "CITA_CANCELADA".equals(citaActualizada.getEstado().name()) ? "CITA_CANCELADA" : "CITA_ACTUALIZADA";
+            enviarNotificacion(tipo, citaActualizada, paciente.getEmail(), paciente.getNombre(), paciente.getApellido());
+        }
+
+        return citaActualizada;
     }
 
     @Override
@@ -127,6 +151,28 @@ public class CitaServiceImplement implements CitaService {
         }
 
         return disponibles;
+    }
+
+    private void enviarNotificacion(String tipo, Cita cita, String email, String nombre, String apellido) {
+        try {
+            NotificacionCitaDTO notificacion = new NotificacionCitaDTO();
+            notificacion.setTipo(tipo);
+            notificacion.setPacienteEmail(email);
+            notificacion.setPacienteNombre(nombre);
+            notificacion.setPacienteApellido(apellido);
+            notificacion.setDoctorNombre(cita.getDoctor().getNombre());
+            notificacion.setDoctorApellido(cita.getDoctor().getApellido());
+            notificacion.setDoctorCorreo(cita.getDoctor().getCorreo());
+            notificacion.setFecha(cita.getFecha().toString());
+            notificacion.setHoraInicio(cita.getHoraInicio().toString());
+            notificacion.setHoraFin(cita.getHoraFin().toString());
+            notificacion.setEstado(cita.getEstado().name());
+
+            String mensajeJson = objectMapper.writeValueAsString(notificacion);
+            rabbitMQProducer.enviarMensaje(mensajeJson);
+        } catch (Exception e) {
+            System.err.println("Error al enviar notificación: " + e.getMessage());
+        }
     }
 }
     
