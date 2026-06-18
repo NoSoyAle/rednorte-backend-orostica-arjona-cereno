@@ -13,4 +13,10 @@ public interface PacienteService {
     Paciente save(Paciente paciente);
 
     void deletebyId(Long id);
+
+    Paciente buscarPorRut(String rut);
+
+    Paciente actualizar(
+        Long id,
+        Paciente paciente);
 }
