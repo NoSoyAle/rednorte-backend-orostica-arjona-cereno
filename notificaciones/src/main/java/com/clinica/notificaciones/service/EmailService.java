@@ -60,11 +60,9 @@ public class EmailService {
         }
 
         sb.append("Detalles de la cita:\n");
-        sb.append("- Médico: Dr. ").append(notificacion.getDoctorNombre())
-          .append(" ").append(notificacion.getDoctorApellido()).append("\n");
+        sb.append("- Médico: Dr. ").append(notificacion.getDoctorNombre()).append(" ").append(notificacion.getDoctorApellido()).append("\n");
         sb.append("- Fecha: ").append(notificacion.getFecha()).append("\n");
-        sb.append("- Horario: ").append(notificacion.getHoraInicio())
-          .append(" - ").append(notificacion.getHoraFin()).append("\n");
+        sb.append("- Horario: ").append(notificacion.getHoraInicio()).append(" - ").append(notificacion.getHoraFin()).append("\n");
         sb.append("- Estado: ").append(notificacion.getEstado()).append("\n\n");
 
         sb.append("Si tiene alguna consulta, por favor contacte a su centro médico.\n");

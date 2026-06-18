@@ -15,5 +15,6 @@ public class RabbitMQProducer {
         rabbitTemplate.convertAndSend("notificaciones", mensaje);
         System.out.println("Mensaje enviado: " + mensaje);
     }
+    
 }
 

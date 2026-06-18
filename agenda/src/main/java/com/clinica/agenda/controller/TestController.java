@@ -36,6 +36,7 @@ public class TestController {
             notificacion.setHoraFin("10:30");
             notificacion.setEstado("CONFIRMADA");
 
+            
             String mensajeJson = objectMapper.writeValueAsString(notificacion);
             producer.enviarMensaje(mensajeJson);
             return "Mensaje JSON enviado: " + mensajeJson;
