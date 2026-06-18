@@ -24,27 +24,32 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+      - name: Verify SONAR_TOKEN exists
+        run: |
+          if [ -z "${{ secrets.SONAR_TOKEN }}" ]; then
+            echo "::error::SONAR_TOKEN secret is empty or not set"
+            exit 1
+          else
+            echo "SONAR_TOKEN is set (length: ${#SONAR_TOKEN})"
+          fi
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Build and test with coverage
         run: mvn clean verify -B
         working-directory: admin-service
 
-      - name: Analyze with SonarCloud
-        uses: SonarSource/sonarqube-scan-action@v6
+      - name: SonarCloud Scan
+        working-directory: admin-service
+        run: |
+          mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.2594:sonar \
+            -Dsonar.token="${SONAR_TOKEN}" \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.projectKey=catvstrofe_rednorte-admin-service \
+            -Dsonar.organization=catvstrofe \
+            -X
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          projectBaseDir: admin-service
-          args: >
-            -Dsonar.projectKey=catvstrofe_rednorte-admin-service
-            -Dsonar.organization=catvstrofe
 
   paciente-analysis:
     name: Paciente Service - SonarCloud Analysis
@@ -63,27 +68,32 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+      - name: Verify SONAR_TOKEN exists
+        run: |
+          if [ -z "${{ secrets.SONAR_TOKEN }}" ]; then
+            echo "::error::SONAR_TOKEN secret is empty or not set"
+            exit 1
+          else
+            echo "SONAR_TOKEN is set (length: ${#SONAR_TOKEN})"
+          fi
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Build and test with coverage
         run: mvn clean verify -B
         working-directory: paciente
 
-      - name: Analyze with SonarCloud
-        uses: SonarSource/sonarqube-scan-action@v6
+      - name: SonarCloud Scan
+        working-directory: paciente
+        run: |
+          mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.2594:sonar \
+            -Dsonar.token="${SONAR_TOKEN}" \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.projectKey=catvstrofe_rednorte-paciente-service \
+            -Dsonar.organization=catvstrofe \
+            -X
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          projectBaseDir: paciente
-          args: >
-            -Dsonar.projectKey=catvstrofe_rednorte-paciente-service
-            -Dsonar.organization=catvstrofe
 
   quality-gate:
     name: Quality Gate Check
